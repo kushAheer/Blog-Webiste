@@ -25,9 +25,18 @@ namespace BlogWeb.Data.Services
             _context.SaveChanges();
         }
 
+        public bool findEmail(string email)
+        {
+            bool result = _context.Users.Any(x => x.Email == email);
+            return result;
+        }
+
+
+
         public bool findUserName(string username)
         {
             //_context.Users.FromSqlRaw("SELECT * FROM Users WHERE userName = {0}", username);
+
             bool result =  _context.Users.Any(x => x.userName == username);
             return result;
             
@@ -55,6 +64,12 @@ namespace BlogWeb.Data.Services
         public string hashPassword(Users user, string password)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Users> LoginCheck(string username, string password, string email)
+        {
+            Users result = await _context.Users.FirstOrDefaultAsync(x => (x.userName == username || x.Email == email) && x.Password == password);
+            return result;
         }
     }
 }
