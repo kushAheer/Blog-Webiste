@@ -13,7 +13,7 @@ using System.Net;
 namespace BlogWeb.Controllers
 {
     [ApiController]
-    [Route("[controller]/")]
+    [Route("[controller]/[action]")]
     public class UserController : ControllerBase
     {
         private readonly IUserServices _userServices;
@@ -90,20 +90,20 @@ namespace BlogWeb.Controllers
             
             
         }
-        //[HttpPost]
-        //public IActionResult Login(string username , string password , string email)
-        //{
-        //    if(username == null && email == null && password == null)
-        //    {
-        //        return new BadRequestResult();
-        //    }
+        [HttpPost]
+        public IActionResult Login(string username, string password, string email)
+        {
+            if (username == null && email == null && password == null)
+            {
+                return new BadRequestResult();
+            }
 
 
 
 
-        //    return Ok();
+            return Ok();
 
-        //}
+        }
     }
     
 }
