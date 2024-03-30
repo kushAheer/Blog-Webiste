@@ -30,7 +30,9 @@ function NavBarComponent() {
                             
                                 <button className={`${classes.button} btn btn-primary`}>Login</button>
                                 <button className={`${classes.button} btn btn-primary`}>Register</button>
-                            
+                            <div>
+                                
+                            </div>
 
                         </div>
                     </div>
