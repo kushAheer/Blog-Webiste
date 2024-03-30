@@ -10,11 +10,11 @@ namespace BlogWeb.Modals
         public string userName { get; set; }
         [Required]
         public string Password { get; set; }
-        public string profileImage { get; set; }
+        public string? profileImage { get; set; }
         [Required]
         public string fullName { get; set; }
-        [Required]
-        public int mobileNumber { get; set; }
+        
+        public int? mobileNumber { get; set; }
         [Required]
         public string Email { get; set; }
 
@@ -22,7 +22,7 @@ namespace BlogWeb.Modals
         public DateTime modifiedAt { get; set; }
         public bool isDeleted { get; set; }
 
-        public string Token { get; set; }
+        public string? Token { get; set; }
 
     }
 }

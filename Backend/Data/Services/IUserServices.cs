@@ -14,6 +14,8 @@ namespace BlogWeb.Data.Services
 
         string generateToken(string user);
 
+        
+
 
 
         //Users AuthenticateUser(string userName, string password);

@@ -13,7 +13,7 @@ using System.Net;
 namespace BlogWeb.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")]
+    [Route("api/[controller]/[action]")]
     public class UserController : ControllerBase
     {
         private readonly IUserServices _userServices;
@@ -57,8 +57,9 @@ namespace BlogWeb.Controllers
                 
                 userVal.Token = token;
 
-                userVal.profileImage = userData.profileImage;
+                userVal.profileImage = "https://images6.alphacoders.com/125/1258531.jpg";
                 
+
                 userVal.fullName = userData.fullName;
                 
                 userVal.mobileNumber = userData.mobileNumber;
@@ -79,6 +80,8 @@ namespace BlogWeb.Controllers
                 {
                     user = userVal.userName,
                     email = userVal.Email,
+                    profileImage = userVal.profileImage,
+                    fullName = userVal.fullName,
                     token = userVal.Token
                 });
 
@@ -91,12 +94,35 @@ namespace BlogWeb.Controllers
             
         }
         [HttpPost]
-        public IActionResult Login(string username, string password, string email)
+        public   async Task<IActionResult>Login(string username, string password, string email)
         {
-            if (username == null && email == null && password == null)
+            try
+            {
+                if ((username == null || email == null) && password == null)
+                {
+                    return new BadRequestResult();
+                }
+                Users user = await  _userServices.LoginCheck(username, password, email);
+                if(user == null)
+                {
+                    return new BadRequestResult();
+                }   
+                return Ok(new
+                {
+                    user = user.userName,
+                    email = user.Email,
+                    profileImage = user.profileImage,
+                    fullName = user.fullName,
+                    token = user.Token
+                });
+                
+
+
+            }catch (System.Exception)
             {
                 return new BadRequestResult();
             }
+
 
 
 

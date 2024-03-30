@@ -71,5 +71,6 @@ namespace BlogWeb.Data.Services
             Users result = await _context.Users.FirstOrDefaultAsync(x => (x.userName == username || x.Email == email) && x.Password == password);
             return result;
         }
+        
     }
 }
