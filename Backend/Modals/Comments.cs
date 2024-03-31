@@ -11,5 +11,7 @@ namespace BlogWeb.Modals
         public string Message {  get; set; }
         public DateTime createdAt { get; set; }
         public bool isDeleted { get; set; }
+
+        public Posts post { get; set; }
     }
 }

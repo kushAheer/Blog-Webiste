@@ -47,7 +47,7 @@ namespace BlogWeb.Controllers
 
                 
                 userVal.Password = userData.Password;
-                if(!(userData.Email.Contains("@") && userData.Email.Contains(".com")))
+                if(!(userData.Email.Contains("@") && userData.Email.Contains(".")))
                 {
                     return new BadRequestResult();
                 }
@@ -93,6 +93,7 @@ namespace BlogWeb.Controllers
             
             
         }
+
         [HttpPost]
         public   async Task<IActionResult>Login(string username, string password, string email)
         {
@@ -103,6 +104,7 @@ namespace BlogWeb.Controllers
                     return new BadRequestResult();
                 }
                 Users user = await  _userServices.LoginCheck(username, password, email);
+                
                 if(user == null)
                 {
                     return new BadRequestResult();

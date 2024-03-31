@@ -9,5 +9,8 @@ namespace BlogWeb.Modals
 
         [ForeignKey("Category")]
         public int categoryId { get; set; }
+
+        public Posts post { get; set; }
+        public Category category { get; set; }
     }
 }

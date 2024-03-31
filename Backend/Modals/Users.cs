@@ -24,5 +24,7 @@ namespace BlogWeb.Modals
 
         public string? Token { get; set; }
 
+        public IEnumerable<Posts> posts { get; set; }
+
     }
 }
