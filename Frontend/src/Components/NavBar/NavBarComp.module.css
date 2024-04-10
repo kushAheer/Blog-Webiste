@@ -15,5 +15,14 @@
 
 .button{
     margin: auto;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 15px;
+}
 
+.container{
+    border-bottom: 1px solid gray;
+    
 }
