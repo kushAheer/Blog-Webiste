@@ -1,13 +1,16 @@
 ﻿using BlogWeb.Data;
-using BlogWeb.Data.Services;
 using BlogWeb.Modals;
 using BlogWeb.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Identity.Client;
 using System.Net;
+using Backend.Data.Error;
+using Backend.Data.Services.User;
 
 
 namespace BlogWeb.Controllers
@@ -24,13 +27,15 @@ namespace BlogWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Regsiter(Users userData)
+        public IActionResult Register(Users userData)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    return new BadRequestResult();
+
+
+                    return BadRequest(new Error(202, "All Fields Are Required "));
                 }
                 Users userVal = new Users();
 
@@ -39,8 +44,7 @@ namespace BlogWeb.Controllers
 
                 if(_userServices.findUserName(userData.userName) || _userServices.findEmail(userData.Email))
                 {
-                    return new BadRequestResult();
-                    
+                    return BadRequest(new Error(400, "UserName or Gmail Already Exists "));
                 }
                 
                 userVal.userName = userData.userName;
@@ -49,7 +53,7 @@ namespace BlogWeb.Controllers
                 userVal.Password = userData.Password;
                 if(!(userData.Email.Contains("@") && userData.Email.Contains(".")))
                 {
-                    return new BadRequestResult();
+                    return BadRequest(new Error(400, "Email Should Contain @"));
                 }
                 userVal.Email = userData.Email;
 
@@ -76,14 +80,15 @@ namespace BlogWeb.Controllers
                 
 
                 _userServices.AddToDataBase(userVal);
-                return Ok( new
+                return Ok(new
                 {
+                    status = 200,
                     user = userVal.userName,
                     email = userVal.Email,
                     profileImage = userVal.profileImage,
                     fullName = userVal.fullName,
                     token = userVal.Token
-                });
+                }) ;
 
             }catch (System.Exception)
             {
@@ -94,23 +99,29 @@ namespace BlogWeb.Controllers
             
         }
 
+        private Exception HttpResponseException(HttpStatusCode badRequest, string v)
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpPost]
-        public   async Task<IActionResult>Login(string username, string password, string email)
+        public async Task<IActionResult> Login(string username, string password)
         {
             try
             {
-                if ((username == null || email == null) && password == null)
+                if (username == null && password == null)
                 {
-                    return new BadRequestResult();
+                    return BadRequest(new Error(400, "All Fields Are Required"));
                 }
-                Users user = await  _userServices.LoginCheck(username, password, email);
+                Users user = await  _userServices.LoginCheck(username, password);
                 
                 if(user == null)
                 {
-                    return new BadRequestResult();
+                    return BadRequest(new Error(400, "User Name or Password Is Incorrect"));
                 }   
                 return Ok(new
                 {
+                    status = 200,
                     user = user.userName,
                     email = user.Email,
                     profileImage = user.profileImage,
@@ -124,10 +135,6 @@ namespace BlogWeb.Controllers
             {
                 return new BadRequestResult();
             }
-
-
-
-
 
             return Ok();
 

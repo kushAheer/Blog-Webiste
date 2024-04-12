@@ -1,18 +1,19 @@
-﻿using BlogWeb.Modals;
+﻿using BlogWeb.Data;
+using BlogWeb.Modals;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace BlogWeb.Data.Services
+namespace Backend.Data.Services.User
 {
     public class UserMethods : IUserServices
     {
         private readonly AppDbContext _context;
         private readonly IConfiguration _config;
-        
-        public UserMethods(AppDbContext context ,IConfiguration config)
+
+        public UserMethods(AppDbContext context, IConfiguration config)
         {
 
             _context = context;
@@ -37,9 +38,9 @@ namespace BlogWeb.Data.Services
         {
             //_context.Users.FromSqlRaw("SELECT * FROM Users WHERE userName = {0}", username);
 
-            bool result =  _context.Users.Any(x => x.userName == username);
+            bool result = _context.Users.Any(x => x.userName == username);
             return result;
-            
+
         }
 
         public string generateToken(string user)
@@ -49,7 +50,7 @@ namespace BlogWeb.Data.Services
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier,user),
-                
+
             };
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
                 _config["Jwt:Audience"],
@@ -66,11 +67,11 @@ namespace BlogWeb.Data.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Users> LoginCheck(string username, string password, string email)
+        public async Task<Users> LoginCheck(string username, string password)
         {
-            Users result = await _context.Users.FirstOrDefaultAsync(x => (x.userName == username || x.Email == email) && x.Password == password);
+            Users result = await _context.Users.FirstOrDefaultAsync(x => x.userName == username && x.Password == password);
             return result;
         }
-        
+
     }
 }

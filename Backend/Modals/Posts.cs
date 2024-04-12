@@ -6,11 +6,11 @@ namespace BlogWeb.Modals
     {
         [Key]
         public int Id { get; set; }
+        
+        public int likesId { get; set; }
 
-        public string likesId { get; set; }
-
-        public string commentId { get; set; }
-        public string userId { get; set; }
+        public int commentId { get; set; }
+        public int userId { get; set; }
 
         public string Title { get; set; }
         public string Image { get; set; }

@@ -1,39 +1,10 @@
 import { Link } from "react-router-dom";
 import classes from './NavBarComp.module.css'
 
-function NavBarComponent() {
+function NavBarComponent({isToken}) {
     return (
         <>
-            {/* <nav className={`container-fluid ${classes.container}`}>
-                <div className="row">
-                    <div className=" col-md-12">
-                        <div className="row">
-                            <div className="col-md-10">
-                                <ul className={`${classes.itemsContainer}`}>
-                                    <li className={`${classes.item}`}>
-                                        <Link to="/">Home</Link>
-                                    </li>
-                                
-                                    <li className={`${classes.item}`}>
-                                        <Link to="/">Blog</Link>
 
-                                    </li>
-                                
-                                    <li className={`${classes.item}`}>
-                                        <Link to="/">Home</Link>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className={`${classes.logIn} col-md-2`}>
-                                    <button className={`${classes.button}`}>Login</button>
-                                    <button className={`${classes.button} btn btn-primary`}>Register</button>
-                                <div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
-                </div>
-            </nav> */}
             <nav className={`navbar navbar-expand-lg  ${classes.container}`}>
                 <div className={`container`}>
 
@@ -67,10 +38,13 @@ function NavBarComponent() {
                             </li>
                         </ul>
                     </div>
-                    <div>
-                        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-                        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Register</button>
-                    </div>
+                    {!isToken && 
+                        <div>
+                            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+                            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Register</button>
+                        </div>
+                    }
+                    {isToken && <div><button className="btn btn-outline-success my-2 my-sm-0" type="submit">Log Out</button></div>}
                 </div>
             </nav>
         </>

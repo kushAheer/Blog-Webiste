@@ -1,4 +1,5 @@
 .background{
+    
     --dot-bg: white;
     --dot-color: #00000072;
     --dot-size: 1.2px;
@@ -29,11 +30,11 @@
 }
 .button{
     background-color: #8C52FF;
-    font-size: x-large;
+    font-size: medium;
     border: solid #8C52FF;
     border-radius: 35px;
     height: 50px;
-    width: 20vh;
+    
     color: white;
     font-weight: 600;
     box-shadow: 5px 19px 13px 1px rgb(102 6 197 / 19%);
