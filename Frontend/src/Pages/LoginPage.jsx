@@ -1,9 +1,9 @@
-import LoginComponent from '../Components/Login/LoginComponent';
 import { redirect } from 'react-router-dom';
+import LoginComponent from '../Components/Authentication/Login/LoginComponent';
 import { responseLogin } from '../Services/PostApi';
-import { useDispatch } from 'react-redux';
 
 function LoginPage() {
+    
   return (
     <div>
       <LoginComponent />
@@ -17,8 +17,7 @@ export default LoginPage;
 
 export async function LoginAction({ request }) {
   
-  console.log("data=================");
-
+  
   const formData = await request.formData();
   
   const data = {
@@ -31,11 +30,13 @@ export async function LoginAction({ request }) {
   const responseData = await responseLogin(data);
   console.log(responseData);
   
-  if (responseData.status === 200) {
+  if(responseData.status === 200) {
     
     localStorage.setItem('token', responseData.token);
+    localStorage.setItem('user', JSON.stringify(responseData));
 
     return redirect('/');
+
   } 
   
 

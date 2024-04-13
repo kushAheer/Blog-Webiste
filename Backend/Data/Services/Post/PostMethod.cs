@@ -41,6 +41,25 @@ namespace Backend.Data.Services.Post
             throw new NotImplementedException();
         }
 
+        public async Task<string> uploadImage(IFormFile file)
+        {
+            var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
+            string fileName = DateTime.Now.Ticks.ToString() + extension;
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Assests\\Images");
+
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
+            var exactpath = Path.Combine(filePath, fileName);
+            using (var fileStream = new FileStream(exactpath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+            return exactpath;
+            
+        }
+
         public async Task<List<Posts>> UserPosts(int id)
         {
             return await _context.Posts.Where(x => x.userId == id).ToListAsync();

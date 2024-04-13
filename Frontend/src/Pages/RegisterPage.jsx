@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import RegisterComponent from "../Components/Register/RegisterComponent"
+import RegisterComponent from "../Components/Authentication/Register/RegisterComponent"
 import { responseRegister } from "../Services/PostApi";
 
 function RegisterPage(){

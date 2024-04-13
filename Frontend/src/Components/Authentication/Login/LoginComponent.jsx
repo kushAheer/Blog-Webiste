@@ -2,14 +2,14 @@ import { useEffect, useReducer, useState } from 'react';
 import classes from './LoginComp.module.css'
 import { Link ,Form, useActionData, useNavigation} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { userSlice } from '../../Services/Data/Slices/UserSlice';
+import { userSlice } from '../../../Services/Data/Slices/UserSlice';
 
 function Login(){
 
     const data = useActionData();
     const navigation  = useNavigation();
     const isSubmiting = navigation.state === "submitting";
-
+    
 
     return(
     <div className = {'d-flex mb-3 sm-3 justify-content-center p-5'}>

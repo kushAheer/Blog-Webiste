@@ -80,7 +80,7 @@ namespace BlogWeb.Controllers
                 
 
                 _userServices.AddToDataBase(userVal);
-                return Ok(new
+                return Ok(new 
                 {
                     status = 200,
                     user = userVal.userName,
@@ -122,6 +122,7 @@ namespace BlogWeb.Controllers
                 return Ok(new
                 {
                     status = 200,
+                    id = user.Id,
                     user = user.userName,
                     email = user.Email,
                     profileImage = user.profileImage,
