@@ -1,5 +1,4 @@
-package.json
-package-lock.json
+
 README.md
 .eslintrc.cjs
 vite.config.js
