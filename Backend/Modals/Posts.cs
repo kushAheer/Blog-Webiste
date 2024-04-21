@@ -6,12 +6,9 @@ namespace BlogWeb.Modals
     {
         [Key]
         public int Id { get; set; }
-        
-        public int likesId { get; set; }
-
-        public int commentId { get; set; }
+        [Required(ErrorMessage = "Authentication Required")]
         public int userId { get; set; }
-
+        [Required(ErrorMessage = "Post Title is Required")]
         public string Title { get; set; }
         public string Image { get; set; }
         public string Summary { get; set; }
@@ -24,7 +21,9 @@ namespace BlogWeb.Modals
         public bool isDeleted { get; set; }
 
         public IEnumerable<Comments> comments { get; set; }
+
         public IEnumerable<Likes> likes { get; set; }   
+        
         public Users user { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace Backend.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class PostController : ControllerBase
     {

@@ -23,6 +23,7 @@ function App() {
       {index : true, element: <HomePage/>,},
       {path: "/register", element: <RegisterPage/>, action : RegisterAction},
       {path: "/login", element: <LoginPage/> , action : LoginAction},
+      {path : '/profile'},
       {path : "/post",
       children: [
         {path: "add", element: <CreatePostPage/>},

@@ -11,6 +11,7 @@ using Microsoft.Identity.Client;
 using System.Net;
 using Backend.Data.Error;
 using Backend.Data.Services.User;
+using Newtonsoft.Json;
 
 
 namespace BlogWeb.Controllers
@@ -20,7 +21,8 @@ namespace BlogWeb.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserServices _userServices;
-
+        
+        
         public UserController(IUserServices userServices)
         {
             _userServices = userServices;
@@ -41,7 +43,7 @@ namespace BlogWeb.Controllers
 
                 userData.userName = userData.userName.ToLower();
                 userData.Email = userData.Email.ToLower();
-
+                
                 if(_userServices.findUserName(userData.userName) || _userServices.findEmail(userData.Email))
                 {
                     return BadRequest(new Error(400, "UserName or Gmail Already Exists "));
@@ -90,8 +92,10 @@ namespace BlogWeb.Controllers
                     token = userVal.Token
                 }) ;
 
-            }catch (System.Exception)
+            }catch (System.Exception ex)
             {
+                var msg = JsonConvert.SerializeObject(ex);
+                //Console.WriteLine(ex.ToString());
                 return new BadRequestResult();
             }
 

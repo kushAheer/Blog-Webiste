@@ -6,7 +6,9 @@ namespace BlogWeb.Modals
     {
         [Key]
         public int Id { get; set; }
+        
         public string categoryName { get; set; }
+        
         public int parentCatId { get; set; }
 
         public Category parentCategory { get; set; }

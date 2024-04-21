@@ -10,7 +10,7 @@ namespace BlogWeb.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Category_Post>().HasKey(x => new { x.postId, x.categoryId });
+            modelBuilder.Entity<Category_Post>().HasNoKey();
         }
 
         public DbSet<Users> Users { get; set; }
