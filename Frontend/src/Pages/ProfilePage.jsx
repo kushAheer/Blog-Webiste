@@ -1,8 +1,10 @@
+import ProfileComp from "../Components/Authentication/Profile/ProfileComp";
+
 function ProfilePage() {
   return (
-    <div>
-      <h1>Profile Page</h1>
-    </div>
+    <React.Fragment>
+      <ProfileComp/>
+    </React.Fragment>
   );
 }
 

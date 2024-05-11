@@ -16,5 +16,6 @@ namespace Backend.Data.Services.Post
         void DeletePost(int id);
 
         Task<string>  uploadImage(IFormFile file);
+        bool isAvailable(int postId);
     }
 }

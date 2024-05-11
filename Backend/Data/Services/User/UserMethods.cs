@@ -43,23 +43,39 @@ namespace Backend.Data.Services.User
 
         }
 
-        public string generateToken(string user)
+        public string generateToken(Users userData)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier,user),
+                new Claim(ClaimTypes.Name,userData.userName),
+                new Claim(ClaimTypes.NameIdentifier,userData.Id.ToString()),
+                new Claim(ClaimTypes.Email,userData.Email),
+                new Claim(ClaimTypes.GivenName,userData.fullName),
+                
 
             };
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
                 _config["Jwt:Audience"],
                 claims,
-                expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddDays(1),
                 signingCredentials: credentials);
 
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public async void updateProfile(Users user)
+        {
+            _context.Users.Update(user);
+            _context.SaveChanges();
+        }
+
+        public async Task<Users> getUser(int id)
+        {
+            Users result  = await _context.Users.FirstOrDefaultAsync(x=>x.Id == id);
+            return result;
         }
 
         public string hashPassword(Users user, string password)

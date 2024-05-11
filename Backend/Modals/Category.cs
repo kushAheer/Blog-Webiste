@@ -11,7 +11,7 @@ namespace BlogWeb.Modals
         
         public int parentCatId { get; set; }
 
-        public Category parentCategory { get; set; }
+        // public Category parentCategory { get; set; }
 
     }
 }

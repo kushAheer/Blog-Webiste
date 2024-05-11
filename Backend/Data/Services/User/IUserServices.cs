@@ -12,7 +12,11 @@ namespace Backend.Data.Services.User
 
         string hashPassword(Users user, string password);
 
-        string generateToken(string user);
+        string generateToken(Users userData);
+        
+        void updateProfile(Users user);
+        
+        Task<Users> getUser(int id);
 
 
 

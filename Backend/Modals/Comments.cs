@@ -16,6 +16,6 @@ namespace BlogWeb.Modals
         
         public bool isDeleted { get; set; }
 
-        public Posts post { get; set; }
+        // public Posts post { get; set; }
     }
 }

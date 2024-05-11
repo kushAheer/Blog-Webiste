@@ -37,7 +37,7 @@ export async function LoginAction({ request }) {
       //dispatch(userSlice.actions.setUser(responseData));
       //dispatch(userSlice.actions.setToken(responseData.token));
       store.dispatch(userSlice.actions.login(responseData));
-      
+      localStorage.setItem('user', JSON.stringify(responseData));
       localStorage.setItem('token', responseData.token);
       
   

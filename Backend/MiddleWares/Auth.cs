@@ -1,38 +1,45 @@
-using Microsoft.AspNetCore.Http;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using BlogWeb.Modals;
 using System.Security.Claims;
+using System.Text;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Primitives;
+using Microsoft.IdentityModel.Tokens;
 
-public class JwtMiddleware
+public class Auth : Attribute , IAuthorizationFilter
 {
-    private readonly RequestDelegate _next;
-    private readonly IConfiguration _config;
+    private readonly IConfiguration _configuration;
 
-    public JwtMiddleware(RequestDelegate next, IConfiguration config)
+    // public Auth(IConfiguration configuration)
+    // {
+    //     _configuration = configuration;
+    //
+    // }
+    //
+    public void OnAuthorization(AuthorizationFilterContext context)
     {
-        _next = next;
-        _config = config;
-    }
-
-    public async Task Invoke(HttpContext context)
-    {
-        var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-
+        var token = context.HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
         if (token != null)
-            AttachUserToContext(context, token);
-
-        await _next(context);
+        {
+            // Set the authenticated user
+            // var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, "username") }, "custom");
+            // context.User = new ClaimsPrincipal(identity);
+            AttachUserToContext(context.HttpContext,token);
+            // await next.Invoke(context);
+        }
+        else
+        {
+            // Handle authentication failure, e.g., redirect to login page
+            context.HttpContext.Response.Redirect("/login");
+            return;
+        }
     }
-
     private void AttachUserToContext(HttpContext context, string token)
     {
         try
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_config["Jwt:Key"]);
+            var key = Encoding.ASCII.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c");
             tokenHandler.ValidateToken(token, new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
@@ -55,4 +62,6 @@ public class JwtMiddleware
             // user is not attached to context so request won't have access to secure routes
         }
     }
+
+    
 }

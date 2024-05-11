@@ -26,3 +26,19 @@
     border-bottom: 1px solid gray;
     
 }
+.cont{
+    width: 20%;
+    justify-content: space-evenly;
+}
+
+.signUp{
+    text-decoration: none;
+    color: #9900ff;
+}
+.login{
+    text-decoration: none;
+    color: #9900ff;   
+}
+.signUp::after{
+    color: aqua;
+}

@@ -5,6 +5,7 @@ import profileImage from "../../assets/Images/profilePic.jpg";
 import store from "../../Services/Data/store";
 import { userSlice } from "../../Services/Data/Slices/UserSlice";
 import { useEffect, useState } from "react";
+
 function NavBarComponent({isToken}) {
 
     
@@ -13,6 +14,7 @@ function NavBarComponent({isToken}) {
         setToken(null);
         store.dispatch(userSlice.actions.logout());
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         
     }
     useEffect(()=>{
@@ -38,9 +40,14 @@ function NavBarComponent({isToken}) {
 
                     
                     {!token && 
-                        <div>
-                            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-                            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Register</button>
+                        <div className={`d-md-flex ${classes.cont}`}> 
+                            <div className="item">
+                                <Link to="/Register" className={`${classes.signUp}`}>Sign Up</Link>
+                            </div>
+                            <div className="item">
+                                <Link to="/Login" className={`${classes.login}`}>Login</Link>
+                            </div>
+                            
                         </div>
                     }
                     
@@ -54,7 +61,7 @@ function NavBarComponent({isToken}) {
                             <Dropdown.Menu>
                                 <Link to="/profile" className="dropdown-item">Profile</Link>
                                 <Link to="post/add" className="dropdown-item">Create Post</Link>
-                                <Dropdown.Item onClick={logOut}>Log Out</Dropdown.Item>
+                                <Link to="/" className="dropdown-item" onClick={logOut}>Log Out</Link>
                             </Dropdown.Menu>
                         </Dropdown>
                     }

@@ -6,6 +6,6 @@
         public int postId { get; set; }
         public int userId { get; set; }
 
-        public Posts post { get; set; }
+        // public Posts post { get; set; }
     }
 }

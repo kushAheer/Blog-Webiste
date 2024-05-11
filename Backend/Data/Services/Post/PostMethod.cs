@@ -60,6 +60,12 @@ namespace Backend.Data.Services.Post
             
         }
 
+        public bool isAvailable(int postId)
+        {
+            _context.Posts.FindAsync(postId);
+            return true;
+        }
+
         public async Task<List<Posts>> UserPosts(int id)
         {
             return await _context.Posts.Where(x => x.userId == id).ToListAsync();

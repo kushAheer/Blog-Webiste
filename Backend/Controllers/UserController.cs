@@ -11,6 +11,7 @@ using Microsoft.Identity.Client;
 using System.Net;
 using Backend.Data.Error;
 using Backend.Data.Services.User;
+using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 
 
@@ -29,6 +30,7 @@ namespace BlogWeb.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Register(Users userData)
         {
             try
@@ -59,7 +61,7 @@ namespace BlogWeb.Controllers
                 }
                 userVal.Email = userData.Email;
 
-                string token = _userServices.generateToken(userVal.userName); 
+                string token = _userServices.generateToken(userData); 
                 
                 userVal.Token = token;
 
@@ -82,14 +84,15 @@ namespace BlogWeb.Controllers
                 
 
                 _userServices.AddToDataBase(userVal);
-                return Ok(new 
-                {
+                return Ok(new {
                     status = 200,
+                    id = userVal.Id,
                     user = userVal.userName,
                     email = userVal.Email,
                     profileImage = userVal.profileImage,
                     fullName = userVal.fullName,
-                    token = userVal.Token
+                    token = "",
+                    expirationTokenTime = 30,
                 }) ;
 
             }catch (System.Exception ex)
@@ -109,6 +112,7 @@ namespace BlogWeb.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(string username, string password)
         {
             try
@@ -122,7 +126,9 @@ namespace BlogWeb.Controllers
                 if(user == null)
                 {
                     return BadRequest(new Error(400, "User Name or Password Is Incorrect"));
-                }   
+                }
+                
+                string token  = _userServices.generateToken(user);
                 return Ok(new
                 {
                     status = 200,
@@ -131,10 +137,10 @@ namespace BlogWeb.Controllers
                     email = user.Email,
                     profileImage = user.profileImage,
                     fullName = user.fullName,
-                    token = user.Token
+                    token = token,
+                    expirationTokenTime = 30,
                 });
                 
-
 
             }catch (System.Exception)
             {
@@ -143,6 +149,73 @@ namespace BlogWeb.Controllers
 
             return Ok();
 
+        }
+        [HttpPatch("{id}")]
+        [Authorize]
+        public async Task<IActionResult> Edit(int id,Users updatedUser)
+        {
+            try
+            {
+                
+                if(!ModelState.IsValid)
+                {
+                    return BadRequest(new Error(400, "All Fields Are Required"));
+                }
+                
+
+                Users user = await _userServices.getUser(id);
+                if(user == null)
+                {
+                    return BadRequest(new Error(202, "User Not Found"));
+                }
+                if(user.userName != updatedUser.userName)
+                {
+                    bool result  = _userServices.findUserName(updatedUser.userName);
+                    if (result == true)
+                    {
+                        return BadRequest(new Error(202, "User Name Already Exists"));    
+                    }
+                    
+                }
+                
+                if(user.Email != updatedUser.Email)
+                {
+                    bool result  = _userServices.findEmail(updatedUser.Email);
+                    if (result == true)
+                    {
+                        return BadRequest(new Error(202, "Email Already Exists"));
+                    }
+                }
+
+                user.userName = updatedUser.userName;
+                
+                user.fullName = updatedUser.fullName;
+                user.profileImage = updatedUser.profileImage;
+                user.mobileNumber = updatedUser.mobileNumber;
+                user.modifiedAt = DateTime.Now;
+                user.Email = updatedUser.Email; 
+                
+                _userServices.updateProfile(user);
+                   
+                return Ok(new
+                {
+                    status = 200,
+                    Id = user.Id,
+                    userName = user.userName,
+                    Email = user.Email,
+                    profileImage = user.profileImage,
+                    fullName = user.fullName, 
+                    mobileNumber = user.mobileNumber,
+                    
+                });
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
         }
     }
     
