@@ -23,15 +23,21 @@ const responseLogin = async (data)=>{
     
 }
 const responseCreatePost = async (data)=>{
-
-    return await fetch(`https://localhost:7098/Post/Create`, {
+    console.log(data);
+    const formData = new FormData();
+    formData.append('userId', data.userId);
+    formData.append('Title', data.Title);
+    formData.append('Summary', data.Summary);
+    formData.append('Category', data.Category);
+    formData.append('Image', data.Image);
+    
+    return await fetch('https://localhost:7098/api/Post/Create', {
         method: 'POST',
         headers: {
-            'Content-Type': 'multipart/form-data',
-            'Accept': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
+            
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
-        body: JSON.stringify(data)
+        body: formData,
     }).then(response => response.json());
 }
 export { responseRegister , responseLogin , responseCreatePost};

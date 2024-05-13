@@ -27,7 +27,7 @@ namespace Backend.Controllers
         [HttpPost]
         
         [Authorize]
-        public async Task<IActionResult> Create([FromForm] PostModel postData)
+        public async Task<IActionResult> Create([FromForm]PostModel postData)
         {
             try
             {

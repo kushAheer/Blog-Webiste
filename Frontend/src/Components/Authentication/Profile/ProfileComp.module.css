@@ -1,0 +1,23 @@
+.profileContainer {
+    
+    align-items: center;
+    height: 100vh;
+    gap: 20px;
+
+}
+
+.profilePic {
+    flex: 1;
+}
+
+.imgProfile{
+    width: 100%;
+    height: auto;
+}
+
+.profileDetails {
+    flex: 2;
+}
+.inputVal{
+
+}

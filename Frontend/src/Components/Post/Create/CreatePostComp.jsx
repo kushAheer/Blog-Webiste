@@ -25,12 +25,13 @@ function CreatePostComp() {
                             <option>Gaming</option>
                             <option>Coding</option>
                             <option>News</option>
+                            <option>Anime</option>
                             
                         </select>
                     </div>
                     <div className="col-md-12 pt-3">
                         <label>Image</label>
-                        <input type="file" className="form-control" placeholder="Enter Category"name="category"/>
+                        <input type="file"  className ="form-control" placeholder="Cover Image" name="image"/>
                     </div>
                     <div className="col-md-12 pt-5">
                         <button type="submit" className={`${classes.button} w-100`}>Create Post</button>

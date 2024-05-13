@@ -27,7 +27,7 @@ export default CreatePostPage;
 
 export async function CreatePostAction({ request }) {
   
-  console.log("data=================");
+  
 
   const formData = await request.formData();
   // const userId = useSelector(state => state.user.id);
@@ -40,10 +40,12 @@ export async function CreatePostAction({ request }) {
         Category : formData.get('category'),
         Image : formData.get('image'),
     };
-    console.log(data);
+    
+    console.log("Before function call");
   
     const responseData = await responseCreatePost(data);
     console.log(responseData);
+    console.log("After function call");
     
     if (responseData.status === 200) {
         
