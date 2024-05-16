@@ -8,11 +8,14 @@ import HomePage, { PostLoader } from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
 import Layout from "./Pages/Layout";
 import { tokenLoader } from "./utils/auth";
-import CreatePostPage, { CreatePostAction } from "./Pages/CreatePostPage";
+import CreatePostPage from "./Pages/CreatePostPage";
 import { LoginAction } from "./Pages/LoginPage";
 import ProfilePage from "./Pages/ProfilePage";
+import PostByIdComponent from "./Components/Post/GET/PostByIdComponent";
+
 
 function App() {
+
   
   const router = createBrowserRouter([
     {
@@ -27,7 +30,8 @@ function App() {
       {path : '/profile',element:<ProfilePage/>},
       {path : "/post",
       children : [
-        {path: "add", element: <CreatePostPage/>,action : CreatePostAction},
+        {path: "add", element: <CreatePostPage/>,},
+        {path: ":id", element: <PostByIdComponent/>}
      ]}
     ]},
   ]);

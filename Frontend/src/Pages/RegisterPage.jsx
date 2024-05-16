@@ -3,7 +3,7 @@ import RegisterComponent from "../Components/Authentication/Register/RegisterCom
 import { responseRegister } from "../Services/PostApi";
 
 function RegisterPage(){
-    
+  
     return(
         <div>
             <RegisterComponent />

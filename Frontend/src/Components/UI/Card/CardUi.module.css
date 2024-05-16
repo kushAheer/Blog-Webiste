@@ -1,0 +1,12 @@
+.learnMore{
+    text-decoration: none;
+    color: blueviolet;
+}
+.summary {
+    
+    width: 100%; /* Adjust as needed */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+      
+}

@@ -45,7 +45,7 @@ namespace Backend.Data.Services.Post
         {
             var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
             string fileName = DateTime.Now.Ticks.ToString() + extension;
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Assets\\Images");
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Assets/Images");
 
             if (!Directory.Exists(filePath))
             {

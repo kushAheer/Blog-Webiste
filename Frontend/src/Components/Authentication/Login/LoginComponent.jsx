@@ -24,7 +24,7 @@ function Login(){
                 </div>
                 <div className='col-md-12'>
                     <label className={`form-label ${classes.itemLablel}`}>Password</label>
-                    <input required className={`${classes.inputItem} form-control  `} name='password' placeholder='Password'/>
+                    <input type='password' required className={`${classes.inputItem} form-control  `} name='password' placeholder='Password'/>
                 </div>
                 {data && <p className='pt-3'>{data.message}</p>}
                 <div className='row'>
