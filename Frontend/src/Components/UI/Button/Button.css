@@ -1,0 +1,49 @@
+.buttonUi {
+    --color: #560bad;
+    font-family: inherit;
+    background-color: white;
+    display: inline-block;
+    width: 8rem;
+    height: 2.6em;
+    line-height: 2.5em;
+
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--color);
+    transition: color .5s;
+    z-index: 1;
+    font-size: 17px;
+    border-radius: 6px;
+    text-align: center;
+    color: var(--color);
+   }
+   
+   .buttonUi:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: var(--color);
+    height: 150px;
+    width: 200px;
+    border-radius: 50%;
+   }
+   
+   .buttonUi:hover {
+    color: #fff;
+   }
+   
+   .buttonUi:before {
+    top: 100%;
+    left: 100%;
+    transition: all .7s;
+   }
+   
+   .buttonUi:hover:before {
+    top: -30px;
+    left: -30px;
+   }
+   
+   .buttonUi:active:before {
+    background: #3a0ca3;
+    transition:  0s;
+   }

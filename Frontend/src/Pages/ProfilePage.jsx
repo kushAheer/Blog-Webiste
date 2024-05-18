@@ -9,3 +9,10 @@ function ProfilePage() {
 }
 
 export default ProfilePage;
+
+// Loader
+export async function ProfileLoader() {
+  return {
+    message: "Profile Page",
+  };
+}

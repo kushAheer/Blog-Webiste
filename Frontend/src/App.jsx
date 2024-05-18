@@ -10,7 +10,7 @@ import Layout from "./Pages/Layout";
 import { tokenLoader } from "./utils/auth";
 import CreatePostPage from "./Pages/CreatePostPage";
 import { LoginAction } from "./Pages/LoginPage";
-import ProfilePage from "./Pages/ProfilePage";
+import ProfilePage, { ProfileLoader } from "./Pages/ProfilePage";
 import PostByIdComponent from "./Components/Post/GET/PostByIdComponent";
 
 
@@ -27,7 +27,7 @@ function App() {
       {index : true, element: <HomePage/>, loader : PostLoader},
       {path : "/register", element: <RegisterPage/>, action : RegisterAction},
       {path : "/login", element: <LoginPage/> , action : LoginAction},
-      {path : '/profile',element:<ProfilePage/>},
+      {path : '/profile',element:<ProfilePage/>,loader : ProfileLoader},
       {path : "/post",
       children : [
         {path: "add", element: <CreatePostPage/>,},

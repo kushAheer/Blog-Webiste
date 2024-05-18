@@ -1,20 +1,18 @@
 import { useLoaderData } from "react-router-dom";
 import HeroBanner from "../Components/Home/HeroBanner";
-import CardUi from "../Components/UI/Card/CardUi";
-import PostComponent from "../Components/Post/GET/PostComponent";
+
+import PostComponent from "../Components/Post/GET/PostComponent.jsx";
 
 
 
 function HomePage() {
     
     const data  = useLoaderData();
-
-
+    
     return (
         <div>
             <HeroBanner/>
             <PostComponent />
-            
         </div>
     )
 }

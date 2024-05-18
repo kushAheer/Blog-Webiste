@@ -1,0 +1,36 @@
+.left{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding-left: 5%;
+
+}
+
+.containerPage{
+    display: flex;
+    justify-content: center;
+}
+.containerBox{
+    max-width: 680px;
+}
+.border{
+    padding-bottom: 20px;
+    border-bottom-width: 1px ;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(242, 242, 242);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+.categoryBox{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: black;
+}
+.addWidth {
+    max-width: 600px; /* For large screens */
+}
+

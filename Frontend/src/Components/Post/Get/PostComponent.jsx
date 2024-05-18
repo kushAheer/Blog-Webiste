@@ -8,11 +8,11 @@ function PostComponent() {
             
             <div className="container pt-5">
                 <div className="row">
-                
                 {data.map((post) => {
                     return (
-                        <div key={post.id} className=" col-lg-3 col-md-4 col-sm-6 col-xs-12 w-0 p-2">
+                        <div key={post.id} className=" col-lg-3 col-md-4 col-sm-6 col-xs-6 p-2">
                             <CardUi
+                                cssClass = {"cardUi"}
                                 token = {localStorage.getItem("token")}
                                 image = {post.image}
                                 title = {post.title}
