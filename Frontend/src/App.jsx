@@ -12,6 +12,8 @@ import CreatePostPage from "./Pages/CreatePostPage";
 import { LoginAction } from "./Pages/LoginPage";
 import ProfilePage, { ProfileLoader } from "./Pages/ProfilePage";
 import PostByIdComponent from "./Components/Post/GET/PostByIdComponent";
+import NotFoundComp from "./Components/Error/NotFoundComp";
+import PostIdPage, { CommentAction, postIdLoader } from "./Pages/PostIdPage";
 
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
      path : "/",
      loader : tokenLoader,
      children : [
+
       {index : true, element: <HomePage/>, loader : PostLoader},
       {path : "/register", element: <RegisterPage/>, action : RegisterAction},
       {path : "/login", element: <LoginPage/> , action : LoginAction},
@@ -31,9 +34,10 @@ function App() {
       {path : "/post",
       children : [
         {path: "add", element: <CreatePostPage/>,},
-        {path: ":id", element: <PostByIdComponent/>}
+        {path: ":id", element: <PostIdPage/> , action : CommentAction ,loader : postIdLoader ,}
      ]}
     ]},
+    {path : "*", element : <NotFoundComp/>},
   ]);
 
   return (    

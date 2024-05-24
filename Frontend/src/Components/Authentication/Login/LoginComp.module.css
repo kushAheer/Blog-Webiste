@@ -30,7 +30,9 @@
     font-size: xx-large;
 }
 .adjustWidth{
-    width: 40%;
+    /* width: 40%; */
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .textColor{

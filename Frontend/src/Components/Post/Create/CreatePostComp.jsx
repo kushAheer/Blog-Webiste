@@ -1,7 +1,5 @@
 import classes from './CreatePostComp.module.css'
-import { Form } from "react-router-dom";
-import { useState } from "react";
-import { useSelector } from 'react-redux';
+
 function CreatePostComp({onSubmit}) {
     
     

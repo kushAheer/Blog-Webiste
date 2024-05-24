@@ -10,7 +10,7 @@ function PostComponent() {
                 <div className="row">
                 {data.map((post) => {
                     return (
-                        <div key={post.id} className=" col-lg-3 col-md-4 col-sm-6 col-xs-6 p-2">
+                        <div key={post.id} className=" col-lg-3 col-md-4 col-sm-6 col-6 p-2">
                             <CardUi
                                 cssClass = {"cardUi"}
                                 token = {localStorage.getItem("token")}

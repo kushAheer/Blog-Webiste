@@ -42,4 +42,19 @@ const responseCreatePost = async (data)=>{
         body: formData
     }).then(response => response.json());
 }
+const responseCreateComment = async (data)=>{
+    return await fetch(`https://localhost:7098/api/Comment/Create`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(response => response.json());
+}
+
+
+
+
 export { responseRegister , responseLogin , responseCreatePost};

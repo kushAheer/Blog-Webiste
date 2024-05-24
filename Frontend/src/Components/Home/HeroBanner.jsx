@@ -1,5 +1,6 @@
 import React from "react";
 import classes from './HeroBanner.module.css'
+import { Link } from "react-router-dom";
 
 
 function HeroBanner() {
@@ -15,9 +16,9 @@ function HeroBanner() {
                             <p className={`${classes.p}`}>create your blog and see others also</p>
 
                         </div>
-                        <div className="p-5 flex-fill">
+                        <div className="p-5 d-flex justify-content-center align-items-center">
 
-                            <button className={`${classes.button}`}>Create Your Blog</button>
+                            <button className={`${classes.button}`}><Link to={'/post/add'} style={{textDecoration : 'none' , color : 'white'}}>Create Your Blog</Link></button>
                         </div>
                     </div>
 

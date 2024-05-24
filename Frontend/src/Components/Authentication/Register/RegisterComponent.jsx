@@ -13,8 +13,8 @@ function RegisterComponent() {
 
     return (
         <React.Fragment>
-            <div className = {'d-flex mb-3 sm-3 justify-content-center'}>
-                <div className={`grid pt-5 gap-0 column-gap-3 ${classes.adjustWidth}`}>
+            <div className = {'d-flex mb-3  justify-content-center'}>
+                <div className={`pt-5 column-gap-3 ${classes.adjustWidth}`}>
                     <div className={`g-col-md-12 text-center `}>
                         <h1 className={`${classes.fontsize}`}>Create Account</h1>
                     </div>
@@ -50,14 +50,16 @@ function RegisterComponent() {
                             </div>
                         </div>
                     </Form>
-                    <div className='pt-5'>
+                    <div className='pt-5 col-md-12'>
                         <div className='row'>
-                            <div className='col-md-6 text-end'>
-                                <p>Already have an account ?</p>
-                            </div>
-                            <div className='col-md-6 text-start p-0'>
+                            <div className='col-md-12 text-center'>
+                                <p>Already have an account ?
                                 <NavLink to='/login' className={`${classes.textColor} text-decoration-none `}> Login Here</NavLink>
+                                </p>
                             </div>
+                            
+                            
+                            
                         </div>
                     </div>
                 </div>
