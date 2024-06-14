@@ -1,24 +1,24 @@
 using System.Text;
+using Backend.Data.Services.Cloudinary;
+using Backend.Data.Services.Like;
 using Microsoft.EntityFrameworkCore;
-using BlogWeb.Data;
-
+using BlogWeb.Backend.Data;
+using Backend.Data;
+using Backend.Data.Services.Comment;
 using Backend.Data.Services.User;
 using Backend.Data.Services.Post;
-using BlogWeb.Modals;
+using BlogWeb.Backend.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using dotenv.net;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-//Conecting to Database
-// builder.Services.AddDbContext<AppDbContext>(options =>
-//     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-// );
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -32,8 +32,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Add services to the container.
 builder.Services.AddScoped<IUserServices, UserMethods>();
 builder.Services.AddScoped<IPostServices, PostMethod>();
+builder.Services.AddScoped<ILikeServices , LikeMethod>();
+builder.Services.AddScoped<ICloudinaryServices, CloudinaryMethod>();
+builder.Services.AddScoped<ICommentServices, CommentMethod>();
 // builder.Services.AddTransient<Auth>();
-builder.Services.AddScoped<Auth>();
+// builder.Services.AddScoped<Auth>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -78,10 +81,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
-        ClockSkew = TimeSpan.Zero
-        
+        ClockSkew = TimeSpan.Zero,
     };
 });
+//Integrating Cloudinary And DotEnv Files
+
+
 builder.Services.AddMvc();
 builder.Services.AddControllers();
 builder.Services.AddRazorPages();

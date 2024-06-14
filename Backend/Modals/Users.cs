@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BlogWeb.Modals
+namespace BlogWeb.Backend.Modals
 {
     public class Users
     {

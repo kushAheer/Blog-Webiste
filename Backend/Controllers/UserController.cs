@@ -1,5 +1,5 @@
-﻿using BlogWeb.Data;
-using BlogWeb.Modals;
+﻿using BlogWeb.Backend.Data;
+using BlogWeb.Backend.Modals;
 using BlogWeb.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,23 +10,26 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.Identity.Client;
 using System.Net;
 using Backend.Data.Error;
+using Backend.Data.Services.Cloudinary;
 using Backend.Data.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 
 
-namespace BlogWeb.Controllers
+namespace BlogWeb.Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
     public class UserController : ControllerBase
     {
         private readonly IUserServices _userServices;
+        private readonly ICloudinaryServices _cloudinaryServices;
         
         
-        public UserController(IUserServices userServices)
+        public UserController(IUserServices userServices ,ICloudinaryServices cloudinaryServices)
         {
             _userServices = userServices;
+            _cloudinaryServices = cloudinaryServices;
         }
 
         [HttpPost]
@@ -55,7 +58,7 @@ namespace BlogWeb.Controllers
 
                 
                 userVal.Password = userData.Password;
-                if(!(userData.Email.Contains("@") && userData.Email.Contains(".")))
+                if(!(userData.Email.Contains('@') && userData.Email.Contains('.')))
                 {
                     return BadRequest(new Error(400, "Email Should Contain @"));
                 }
@@ -97,8 +100,7 @@ namespace BlogWeb.Controllers
 
             }catch (System.Exception ex)
             {
-                var msg = JsonConvert.SerializeObject(ex);
-                //Console.WriteLine(ex.ToString());
+             
                 return new BadRequestResult();
             }
 
@@ -106,10 +108,7 @@ namespace BlogWeb.Controllers
             
         }
 
-        private Exception HttpResponseException(HttpStatusCode badRequest, string v)
-        {
-            throw new NotImplementedException();
-        }
+    
 
         [HttpPost]
         [AllowAnonymous]
@@ -147,7 +146,7 @@ namespace BlogWeb.Controllers
                 return new BadRequestResult();
             }
 
-            return Ok();
+            
 
         }
         [HttpPatch("{id}")]
@@ -191,6 +190,8 @@ namespace BlogWeb.Controllers
                 
                 user.fullName = updatedUser.fullName;
                 user.profileImage = updatedUser.profileImage;
+                // string profileImage = await _cloudinaryServices.addProfilePicture(updatedUser.);
+                
                 user.mobileNumber = updatedUser.mobileNumber;
                 user.modifiedAt = DateTime.Now;
                 user.Email = updatedUser.Email; 

@@ -1,11 +1,15 @@
 ﻿using System.Formats.Asn1;
 using System.Security.Claims;
 using Backend.Data.Error;
+using Backend.Data.Services.Cloudinary;
 using Backend.Data.Services.Post;
+using Backend.Data.Services.User;
 using Backend.Modals.ViewModals;
-using BlogWeb.Modals;
+using BlogWeb.Backend.Modals;
+using CloudinaryDotNet;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 
 
 namespace Backend.Controllers
@@ -14,12 +18,15 @@ namespace Backend.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        
 
+        private readonly IUserServices _userServices;
         private readonly IPostServices _postServices;
-        public PostController(IPostServices postServices)
+        private readonly ICloudinaryServices _cloudinary;
+        public PostController(IPostServices postServices , IUserServices userServices , ICloudinaryServices cloudinary)
         {
             _postServices = postServices;
+            _userServices = userServices;
+            _cloudinary = cloudinary;
         }
 
         
@@ -60,8 +67,8 @@ namespace Backend.Controllers
                 postVal.Title = postData.Title;
                 postVal.Summary = postData.Summary;
                 postVal.Category = postData.Category;
-            
-                string path = await _postServices.uploadImage(postData.Image);
+
+                string path = await _cloudinary.addPostImage(postData.Image);
                 postVal.Image = path;
                 postVal.createdAt = DateTime.Now;
                 postVal.modifiedAt = DateTime.Now;
@@ -109,7 +116,7 @@ namespace Backend.Controllers
             });
         }
 
-        [HttpGet("Id")]
+        [HttpGet("{Id}")]
         [Authorize]
         public async Task<IActionResult> GET(int Id)
         {
@@ -122,10 +129,23 @@ namespace Backend.Controllers
             {
                 return BadRequest(new Error(404, "Post Not Found"));
             }
+
+            Users userData = await _userServices.getUser(post.userId);
+            if(userData == null)
+            {
+                return BadRequest(new Error(404, "User Not Found"));
+            }
             return Ok(new
             {
                 status = 200,
                 post = post,
+                user = new {
+                    userName = userData.userName,
+                    fullName = userData.fullName,
+                    email = userData.Email,
+                    prfileImage = userData.profileImage,
+                    id = userData.Id
+                }
             });
         }
     }

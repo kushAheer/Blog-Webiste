@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BlogWeb.Controllers
+namespace BlogWeb.Backend.Controllers
 {
     [ApiController]
     [Route("[controller]")]

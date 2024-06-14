@@ -1,5 +1,9 @@
-﻿using BlogWeb.Data;
-using BlogWeb.Modals;
+﻿using BlogWeb.Backend.Data;
+using BlogWeb.Backend.Modals;
+using CloudinaryDotNet;
+
+using CloudinaryDotNet.Actions;
+using dotenv.net;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Data.Services.Post
@@ -7,10 +11,12 @@ namespace Backend.Data.Services.Post
     public class PostMethod : IPostServices
     {
         private readonly AppDbContext _context;
+        
         public PostMethod(AppDbContext context)
         {
             _context = context;
         }
+        
         public async void AddToDataBase(Posts postData)
         {
             await _context.Posts.AddAsync(postData);
@@ -41,24 +47,7 @@ namespace Backend.Data.Services.Post
             throw new NotImplementedException();
         }
 
-        public async Task<string> uploadImage(IFormFile file)
-        {
-            var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
-            string fileName = DateTime.Now.Ticks.ToString() + extension;
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Assets/Images");
 
-            if (!Directory.Exists(filePath))
-            {
-                Directory.CreateDirectory(filePath);
-            }
-            var exactpath = Path.Combine(filePath, fileName);
-            using (var fileStream = new FileStream(exactpath, FileMode.Create))
-            {
-                await file.CopyToAsync(fileStream);
-            }
-            return exactpath;
-            
-        }
 
         public bool isAvailable(int postId)
         {

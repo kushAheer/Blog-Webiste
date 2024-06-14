@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BlogWeb.Modals
+namespace BlogWeb.Backend.Modals
 {
     public class Category_Post
     {

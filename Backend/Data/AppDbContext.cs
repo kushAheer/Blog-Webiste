@@ -1,7 +1,7 @@
-﻿using BlogWeb.Modals;
+﻿using BlogWeb.Backend.Modals;
 using Microsoft.EntityFrameworkCore;
 
-namespace BlogWeb.Data
+namespace BlogWeb.Backend.Data
 {
     public class AppDbContext : DbContext
     {

@@ -1,4 +1,4 @@
-﻿using BlogWeb.Modals;
+﻿using BlogWeb.Backend.Modals;
 
 namespace Backend.Data.Services.Post
 {
@@ -15,7 +15,7 @@ namespace Backend.Data.Services.Post
 
         void DeletePost(int id);
 
-        Task<string>  uploadImage(IFormFile file);
+
         bool isAvailable(int postId);
     }
 }

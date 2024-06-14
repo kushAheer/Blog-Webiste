@@ -1,4 +1,4 @@
-﻿namespace BlogWeb.Modals
+﻿namespace BlogWeb.Backend.Modals
 {
     public class Likes
     {

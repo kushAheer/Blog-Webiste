@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers;
 
-[Route("api/[controller]/[action]")]
 [ApiController]
+[Route("api/[controller]/[action]")]
+
 public class LikeConroller : ControllerBase
 {
     private readonly ILikeServices _likeServices;
@@ -18,7 +19,7 @@ public class LikeConroller : ControllerBase
         _postServices = postServices;
     }
     // GET
-    [HttpPost]
+    [HttpPost("Add")]
     [Authorize]
     public IActionResult POST(int postId , int userId)
     {
@@ -29,7 +30,8 @@ public class LikeConroller : ControllerBase
                 return BadRequest(new Error(202, "All Fields Are Required "));
             }
 
-            var post = _postServices.PostById(postId);
+            
+            
 
             _likeServices.AddLikeByPostId(postId, userId);
             return Ok(new {

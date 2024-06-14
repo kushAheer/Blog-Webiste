@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BlogWeb.Modals
+namespace BlogWeb.Backend.Modals
 {
     public class Posts
     {

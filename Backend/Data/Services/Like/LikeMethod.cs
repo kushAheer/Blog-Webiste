@@ -1,5 +1,5 @@
-using BlogWeb.Data;
-using BlogWeb.Modals;
+using BlogWeb.Backend.Data;
+using BlogWeb.Backend.Modals;
 
 namespace Backend.Data.Services.Like;
 

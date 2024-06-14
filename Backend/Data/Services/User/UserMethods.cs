@@ -1,5 +1,5 @@
-﻿using BlogWeb.Data;
-using BlogWeb.Modals;
+﻿using BlogWeb.Backend.Data;
+using BlogWeb.Backend.Modals;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -66,9 +66,9 @@ namespace Backend.Data.Services.User
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public async void updateProfile(Users user)
+        public void updateProfile(Users user)
         {
-            _context.Users.Update(user);
+            _context.Users.Update(user); 
             _context.SaveChanges();
         }
 

@@ -3,7 +3,7 @@ import HeroBanner from "../Components/Home/HeroBanner";
 
 import PostComponent from "../Components/Post/GET/PostComponent.jsx";
 
-
+import {getPost} from "../Services/GetApi";
 
 function HomePage() {
     
@@ -66,9 +66,9 @@ export async  function PostLoader() {
 
         const data  = await getPost();
         if(data.posts !== undefined && data.posts !== null){
-            console.log(data);
+            // console.log(data);
             return data.posts;
         }
-        console.log("No Data");
+        // console.log("No Data");
     return data.posts;
 }

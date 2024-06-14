@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import CardUi from "../../UI/Card/CardUi";
 function PostComponent() {
     const data  = useLoaderData();
-    
+    // console.log(data)
     return (
         <>
             

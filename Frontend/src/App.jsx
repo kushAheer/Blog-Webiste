@@ -31,7 +31,7 @@ function App() {
       {path : "/register", element: <RegisterPage/>, action : RegisterAction},
       {path : "/login", element: <LoginPage/> , action : LoginAction},
       {path : '/profile',element:<ProfilePage/>,loader : ProfileLoader},
-      {path : "/post",
+      {path : "/post", 
       children : [
         {path: "add", element: <CreatePostPage/>,},
         {path: ":id", element: <PostIdPage/> , action : CommentAction ,loader : postIdLoader ,}

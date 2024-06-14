@@ -1,4 +1,4 @@
-﻿using BlogWeb.Modals;
+﻿using BlogWeb.Backend.Modals;
 
 namespace Backend.Data.Services.User
 {
