@@ -1,5 +1,6 @@
 using BlogWeb.Backend.Data;
 using BlogWeb.Backend.Modals;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Data.Services.Like;
 
@@ -33,13 +34,13 @@ public class LikeMethod : ILikeServices
 
     }
 
-    public string DeletedLikeByPostId(int likeId,int postId , int userId)
+    public string DeletedLikeByPostId(int postId , int userId)
     {
         var post = _context.Posts.Find(postId);
          
         if (post != null)
         {
-            Likes data = _context.Likes.FirstOrDefault(x => x.userId == userId && x.postId == postId && x.Id == likeId);
+            Likes data = _context.Likes.FirstOrDefault(x => x.userId == userId && x.postId == postId);
             if (data == null)
             {
                 return "Error";
@@ -51,5 +52,24 @@ public class LikeMethod : ILikeServices
         }
 
         return "Error";
+    }
+
+    public bool isLiked(int postId, int userId)
+    {
+        try
+        {
+            Likes data = _context.Likes.FirstOrDefault(x=>x.userId == userId && x.postId == postId);
+            if (data == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return false;
+        }
     }
 }

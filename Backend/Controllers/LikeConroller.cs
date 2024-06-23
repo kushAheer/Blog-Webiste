@@ -44,5 +44,55 @@ public class LikeConroller : ControllerBase
             Console.WriteLine(e);
             throw;
         }
+        
+    }
+
+    [HttpDelete("Remove")]
+    [Authorize]
+    public IActionResult DELETE(int postId , int userId)
+    {
+        try
+        {
+            if (!ModelState.IsValid) 
+            {
+                return BadRequest(new Error(202, "All Fields Are Required "));
+            }
+            
+            _likeServices.DeletedLikeByPostId(postId,userId);
+            return Ok(new {
+                status = 200,
+                message = "Like Added Successfully",
+            });
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        
+        
+    }
+    [HttpGet("IsLiked")]
+    [Authorize]
+    public IActionResult GET(int postId , int userId)
+    {
+        try
+        {
+            if (!ModelState.IsValid) 
+            {
+                return BadRequest(new Error(202, "All Fields Are Required "));
+            }
+            
+            bool result = _likeServices.isLiked(postId, userId);
+            return Ok(new {
+                status = 200,
+                result,
+            });
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }

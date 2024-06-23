@@ -31,14 +31,14 @@
 
 .heart-container .svg-filled {
   animation: keyframes-svg-filled 1s;
-  display: none;
+  
 }
 
 .heart-container .svg-celebrate {
   position: absolute;
   animation: keyframes-svg-celebrate .5s;
   animation-fill-mode: forwards;
-  display: none;
+  
   stroke: var(--heart-color);
   fill: var(--heart-color);
   stroke-width: 2px;

@@ -22,6 +22,7 @@ const responseLogin = async (data)=>{
     }).then(response => response.json());
     
 }
+
 const responseCreatePost = async (data)=>{
     
     console.log(data);
@@ -42,8 +43,9 @@ const responseCreatePost = async (data)=>{
         body: formData
     }).then(response => response.json());
 }
+
 const responseCreateComment = async (data)=>{
-    return await fetch(`https://localhost:7098/api/Comment/Create`, {
+    return await fetch(`https://localhost:7098/api/Comment/POST/Add`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -57,4 +59,5 @@ const responseCreateComment = async (data)=>{
 
 
 
-export { responseRegister , responseLogin , responseCreatePost};
+
+export { responseRegister , responseLogin , responseCreatePost , responseCreateComment};

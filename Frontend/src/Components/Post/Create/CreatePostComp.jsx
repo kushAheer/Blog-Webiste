@@ -33,7 +33,7 @@ function CreatePostComp({onSubmit}) {
                     </div>
                     <div className="col-md-12 pt-3">
                         <label>Description</label>
-                        <input type="text" className="form-control" placeholder="Enter Description" name="description" />
+                        <textarea type="text" className="form-control" placeholder="Enter Description" name="description" />
                     </div>
                     <div className="col-md-12 pt-3">
                         <label>Category</label>

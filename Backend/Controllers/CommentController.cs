@@ -1,5 +1,6 @@
 using Backend.Data.Error;
 using Backend.Data.Services.Comment;
+using Backend.Modals.ViewModals;
 using BlogWeb.Backend.Modals;
 using Microsoft.AspNetCore.Mvc;
 
@@ -55,4 +56,29 @@ public class CommentController : Controller
         
     }
     
+    [HttpGet]
+    public async Task<IActionResult> GET(int postId)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new Error(202, "All Fields Are Required "));
+            }
+
+            List<CommentModel> comments = await _commentServices.getCommentById(postId);
+            
+            return Ok(new
+            {
+                status = 200,
+                message = "Comments Fetched Successfully",
+                data = comments
+            });
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
 }

@@ -1,3 +1,4 @@
+using Backend.Modals.ViewModals;
 using BlogWeb.Backend.Data;
 using BlogWeb.Backend.Modals;
 using Microsoft.EntityFrameworkCore;
@@ -46,5 +47,36 @@ public class CommentMethod : ICommentServices
         }
 
         return "Error";
+    }
+
+    public async Task<List<CommentModel>> getCommentById(int id)
+    {
+        try
+        {
+            var data = _context.Comments.ToList().Where(x=>x.postId == id);
+             
+             List<CommentModel> commentData = new List<CommentModel>();
+             
+            foreach (var comment in data)
+            {
+                var user =  _context.Users.Find(comment.userId);
+                CommentModel commentModel = new CommentModel
+                {
+                    postId = comment.postId,
+                    userName = user.userName,
+                    comment = comment.Message,
+                    date = comment.createdAt,
+                    profileImage = user.profileImage
+                };
+
+                commentData.Add(commentModel);
+            }
+            return commentData;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }
