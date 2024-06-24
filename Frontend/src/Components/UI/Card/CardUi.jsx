@@ -16,7 +16,7 @@ function CardUi(props, { cssClass ="cardUi" }) {
                 <img src={props.image} className="card-img-top" alt="..."/>
                     <div className="card-body">
                         <h3 className="card-title">{props.title}</h3>
-                        <p className={`card-text ${classes.summary}`}>{props.summary}</p>
+                        <p className={`card-text ${classes.summary}`}>{props.text}</p>
                         <div className='d-flex'>
                             <div className='col-md-6'>
 

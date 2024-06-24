@@ -2,6 +2,7 @@ using Backend.Data.Error;
 using Backend.Data.Services.Comment;
 using Backend.Modals.ViewModals;
 using BlogWeb.Backend.Modals;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers;
@@ -17,6 +18,7 @@ public class CommentController : Controller
     
     // GET
     [HttpPost("Add")]
+    [Authorize]
     public IActionResult POST(Comments commentData)
     {
         try
@@ -57,6 +59,7 @@ public class CommentController : Controller
     }
     
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GET(int postId)
     {
         try
@@ -73,6 +76,34 @@ public class CommentController : Controller
                 status = 200,
                 message = "Comments Fetched Successfully",
                 data = comments
+            });
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+    [HttpDelete]
+    public IActionResult Delete(Comments commentsData)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new Error(202, "All Fields Are Required "));
+            }
+
+            string status = _commentServices.deleteComment(commentsData);
+            if (status == "Error")
+            {
+                return BadRequest(new Error(202, "Comment Not Found"));
+            }
+            
+            return Ok(new
+            {
+                status = 200,
+                message = "Comment Deleted Successfully",
             });
         }
         catch (Exception e)

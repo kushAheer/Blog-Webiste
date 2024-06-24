@@ -33,6 +33,7 @@ const responseCreatePost = async (data)=>{
     formData.append('Category', data.Category);
     formData.append('Image', data.Image);
     formData.append('userId', data.userId);
+    formData.append('text', data.text);
     return await fetch(`https://localhost:7098/api/Post/Create`, {
         method: 'POST',
         headers: {

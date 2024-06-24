@@ -33,7 +33,7 @@ const commentData = async (postId)=>{
         method: 'GET',
         headers: {
             'Accept': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
 
         }
     }).then(response => response.json());

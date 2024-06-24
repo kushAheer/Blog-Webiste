@@ -26,7 +26,7 @@ function CreatePostPage(props){
             navigate('/');
         } 
         
-        return responseData;
+        return {responseData};
     }
     return (
         <div>

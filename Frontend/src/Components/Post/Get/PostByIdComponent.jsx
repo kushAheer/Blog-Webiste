@@ -1,14 +1,14 @@
 import { Form, useLoaderData, useParams, useSearchParams } from "react-router-dom";
 import classes from './PostById.module.css';
 import Like from "../../UI/Like/Like";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import CommentList from "../../UI/CommentBox/CommentList";
 import ButtonUi from "../../UI/Button/Button";
 
 function PostByIdComponent(props) {
 
     const data = useLoaderData();
-
+    const [commentInput, setCommentInput] = useState("");
     const [alreadyLiked, setAlreadyLiked] = useState(data.isLiked.result);
     const [totalLike, setTotalLike] = useState(data.postData.post.totalLikes);
 
@@ -49,6 +49,10 @@ function PostByIdComponent(props) {
         })
 
     }
+
+    const content = data.postData.post.summary;
+    
+    
     return (
 
         <>
@@ -58,25 +62,26 @@ function PostByIdComponent(props) {
                         <div className={`${classes.border} `}>
                             <img src={data.postData.user.image} alt="..." className={`img-fluid `} />
                             <h5 className="p-1">{data.postData.user.userName}</h5>
-
                             <div onClick={alreadyLiked ? removeLike : increaseLike}>
                                 <Like isLiked={alreadyLiked} />
                                 {totalLike}
-
                             </div>
                         </div>
                         <h1>{data.postData.post.title}</h1>
                         <div className="col-md-12 pt-5">
                             <img src={`${data.postData.post.image}`} alt="..." className={`img-fluid rounded-5`} />
                         </div>
-                        <div className="col-md-12 pt-5">
-                            <p>{data.postData.post.summary}</p>
+                        <div className="col-md-12 pt-5" dangerouslySetInnerHTML={{__html : content}}>
+                            {/* <textarea className={`form-control ${classes.textArea}`} value={content} readOnly></textarea > */}
+
                         </div>
                         {props.children}
                         <div>
-                            <Form method="POST">
-                                <input className="form-control" name="comment" id="comment" rows="3"></input>
-                                <ButtonUi type={"submit"}>Send</ButtonUi>
+                            <Form method="POST" className="row">
+                                <div className="col-md-10">
+                                    <input className="form-control" name="comment" id="comment" value={commentInput} onChange={(e)=>{setCommentInput(e.target.value)}} rows="2"></input>
+                                </div>
+                                <ButtonUi type={"submit"} classes={"col-md-2"} onClick = {()=>{setTimeout(()=>{setCommentInput("")},2000)}}>Send</ButtonUi>
                             </Form>
                             <CommentList />
                         </div>

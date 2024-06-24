@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import CardUi from "../../UI/Card/CardUi";
 function PostComponent() {
     const data  = useLoaderData();
-    // console.log(data)
+    console.log(data)
     return (
         <>
             
@@ -17,6 +17,7 @@ function PostComponent() {
                                 image = {post.image}
                                 title = {post.title}
                                 summary = {post.summary}
+                                text = {post.editorText}
                                 id = {post.id}
                             />
                         </div>

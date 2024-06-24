@@ -11,10 +11,10 @@ import { tokenLoader } from "./utils/auth";
 import CreatePostPage from "./Pages/CreatePostPage";
 import { LoginAction } from "./Pages/LoginPage";
 import ProfilePage, { ProfileLoader } from "./Pages/ProfilePage";
-import PostByIdComponent from "./Components/Post/GET/PostByIdComponent";
+
 import NotFoundComp from "./Components/Error/NotFoundComp";
 import PostIdPage, { CommentAction, postIdLoader } from "./Pages/PostIdPage";
-
+import EditPage, { EditLoader } from "./Pages/EditPage";
 
 function App() {
 
@@ -30,6 +30,7 @@ function App() {
       {index : true, element: <HomePage/>, loader : PostLoader},
       {path : "/register", element: <RegisterPage/>, action : RegisterAction},
       {path : "/login", element: <LoginPage/> , action : LoginAction},
+      {path : '/edit/:id', element : <EditPage/>,loader : EditLoader},
       {path : '/profile',element:<ProfilePage/>,loader : ProfileLoader},
       {path : "/post", 
       children : [

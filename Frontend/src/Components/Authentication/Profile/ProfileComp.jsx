@@ -1,10 +1,12 @@
 import React from "react";
 import classes from './ProfileComp.module.css'; // Import the CSS file
-
+import ButtonUi from "../../UI/Button/Button";
+import { NavLink } from "react-router-dom";
 function ProfileComp() {
     return (
         <React.Fragment>
-            <div classNameName="container pt-5">
+
+            <div className="container pt-5">
                 <div className="row">
                     <div className={`${classes.left} col-lg-4`}>
                         <div>
@@ -18,7 +20,13 @@ function ProfileComp() {
                         <h1>Posts</h1>
                         <div className={`row ${classes.gallery}`}>
                             <div className="col-md-4">
-                                <img className={`${classes.img}`} src="https://images.pexels.com/photos/1036371/pexels-photo-1036371.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
+
+
+                            </div>
+                            <div className="col-md-4">
+
+                                <img className={`${classes.img}`} onMouseOver={() => { }} src="https://images.pexels.com/photos/1036371/pexels-photo-1036371.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
+
                             </div>
                             <div className="col-md-4">
                                 <img className={`${classes.img}`} src="https://images.pexels.com/photos/861034/pexels-photo-861034.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
@@ -36,6 +44,10 @@ function ProfileComp() {
                                 <img className={`${classes.img}`} src="https://images.pexels.com/photos/50859/pexels-photo-50859.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
                             </div>
                         </div>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end pb-2 pt-2">
+                    
+                        <NavLink to={`/edit/:${JSON.parse(localStorage.getItem('user')).id}`}><ButtonUi >Edit</ButtonUi></NavLink>
                     </div>
                 </div>
             </div>

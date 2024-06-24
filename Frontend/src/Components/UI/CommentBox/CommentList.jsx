@@ -22,11 +22,11 @@ function CommentList() {
 
                 </ul>
             </div> */}
-            <div class="comments">
-                {data.map((item) => (
-                    <div class="list-comments">
+            <div className="comments">
+                {data.map((item ,index) => (
+                    <div className="list-comments" key={index}>
                         <div>
-                            <p><span class="username">{item.userName}</span> |  {item.date}</p>
+                            <p><span className="username">{item.userName}</span> |  {item.date}</p>
                             <p>{item.comment}</p>
                         </div>
                     </div>

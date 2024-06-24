@@ -32,7 +32,6 @@ namespace Backend.Controllers
         
         
         [HttpPost]
-        
         [Authorize]
         public async Task<IActionResult> Create([FromForm]PostModel postData)
         {
@@ -45,9 +44,9 @@ namespace Backend.Controllers
                 Posts postVal = new Posts();
                 postVal.userId = postData.userId;
 
-                if(postData.Summary.Length > 100)
+                if(postData.Summary.Length < 50)
                 {
-                    return BadRequest(new Error(202, "Summary Should Be Less Than 100 Characters"));
+                    return BadRequest(new Error(202, "Summary Should Be Greater Than 50 Characters"));
                 }
                 if(postData.Title.Length > 30)
                 {
@@ -67,7 +66,7 @@ namespace Backend.Controllers
                 postVal.Title = postData.Title;
                 postVal.Summary = postData.Summary;
                 postVal.Category = postData.Category;
-
+                postVal.editorText = postData.text;
                 string path = await _cloudinary.addPostImage(postData.Image);
                 postVal.Image = path;
                 postVal.createdAt = DateTime.Now;

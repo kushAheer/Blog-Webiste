@@ -11,6 +11,7 @@ namespace BlogWeb.Backend.Modals
         
         public string Title { get; set; }
         public string Image { get; set; }
+        public string editorText { get; set; }
         public string Summary { get; set; }
         public string Category { get; set; }
         public int totalLikes { get; set; }
