@@ -39,6 +39,13 @@ const commentData = async (postId)=>{
     }).then(response => response.json());
 
 }
-
-
-export { getPost , getPostById ,postLiked , commentData};
+const getPostUserId = async (id)=>{
+    return await fetch(`https://localhost:7098/api/Post/GETPostByUser/${id}`,{
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        }
+    }).then(response => response.json());
+}
+export { getPost , getPostById ,postLiked , commentData , getPostUserId};

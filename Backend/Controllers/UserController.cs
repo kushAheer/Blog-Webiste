@@ -135,6 +135,7 @@ namespace BlogWeb.Backend.Controllers
                     user = user.userName,
                     email = user.Email,
                     profileImage = user.profileImage,
+                    mobileNumber = user.mobileNumber,
                     fullName = user.fullName,
                     token = token,
                     expirationTokenTime = 30,

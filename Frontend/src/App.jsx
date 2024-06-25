@@ -14,7 +14,7 @@ import ProfilePage, { ProfileLoader } from "./Pages/ProfilePage";
 
 import NotFoundComp from "./Components/Error/NotFoundComp";
 import PostIdPage, { CommentAction, postIdLoader } from "./Pages/PostIdPage";
-import EditPage, { EditLoader } from "./Pages/EditPage";
+import EditPage, { EditAction, EditLoader } from "./Pages/EditPage";
 
 function App() {
 
@@ -30,7 +30,7 @@ function App() {
       {index : true, element: <HomePage/>, loader : PostLoader},
       {path : "/register", element: <RegisterPage/>, action : RegisterAction},
       {path : "/login", element: <LoginPage/> , action : LoginAction},
-      {path : '/edit/:id', element : <EditPage/>,loader : EditLoader},
+      {path : '/edit/:id', element : <EditPage/>,loader : EditLoader , action : EditAction},
       {path : '/profile',element:<ProfilePage/>,loader : ProfileLoader},
       {path : "/post", 
       children : [

@@ -147,5 +147,20 @@ namespace Backend.Controllers
                 }
             });
         }
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<IActionResult> GETPostByUser(int id)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(new Error(202, "All Fields Are Required "));
+            }
+            List<Posts> posts = await _postServices.UserPosts(id);
+            return Ok(new
+            {
+                status = 200,
+                posts = posts
+            });
+        }
     }
 }

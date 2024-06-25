@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import classes from './NavBarComp.module.css'
 import {Dropdown} from 'react-bootstrap';
-import profileImage from "../../assets/Images/profilePic.jpg";
+
 import store from "../../Services/Data/store";
 import { userSlice } from "../../Services/Data/Slices/UserSlice";
 import { useEffect, useState } from "react";
@@ -10,8 +10,10 @@ function NavBarComponent({isToken}) {
 
     
     const [token, setToken] = useState();
+    const [user , setProfileImage] = useState();
     const logOut = ()=>{
         setToken(null);
+        setProfileImage('');
         store.dispatch(userSlice.actions.logout());
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -20,6 +22,7 @@ function NavBarComponent({isToken}) {
     useEffect(()=>{
         
         setToken(localStorage.getItem('token'));
+        setProfileImage(JSON.parse(localStorage.getItem('user')));
         if(isToken){
             setToken(isToken);
             
@@ -55,7 +58,7 @@ function NavBarComponent({isToken}) {
                     {token && 
                         <Dropdown>
                             <Dropdown.Toggle as="a" id="dropdown-basic">
-                            <img src={profileImage} alt="Profile" style={{height: '45px', borderRadius: '50%'}} />
+                            <img src={user.profileImage} alt="Profile" style={{height: '45px', borderRadius: '50%'}} />
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
