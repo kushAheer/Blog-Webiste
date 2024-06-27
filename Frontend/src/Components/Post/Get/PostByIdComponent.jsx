@@ -60,7 +60,7 @@ function PostByIdComponent(props) {
                 <div className={`row `} >
                     <div className="col-md-6 offset-md-3 offset-sm-12 col-sm-12 ps-4" >
                         <div className={`${classes.border} `}>
-                            <img src={data.postData.user.image} alt="..." className={`img-fluid `} />
+                            <img src={data.postData.user.profileImage} alt="..." className={`img-fluid `}style={{height: '45px', borderRadius: '50%'}} />
                             <h5 className="p-1">{data.postData.user.userName}</h5>
                             <div onClick={alreadyLiked ? removeLike : increaseLike}>
                                 <Like isLiked={alreadyLiked} />

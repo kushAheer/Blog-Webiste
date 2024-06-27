@@ -65,7 +65,7 @@ public class CommentMethod : ICommentServices
                     postId = comment.postId,
                     userName = user.userName,
                     comment = comment.Message,
-                    date = comment.createdAt,
+                    date = comment.createdAt.ToString("MMMM dd, yyyy"),
                     profileImage = user.profileImage
                 };
 

@@ -68,7 +68,7 @@ const responseEditUserDetails = async (data) => {
     formData.append('email', data.email);
     formData.append('mobileNumber', data.mobileNumber);
     formData.append('profileImage', data.profileImage);
-    return await fetch(`https://localhost:7098/api/Post/Edit/${data.userId}`, {
+    return await fetch(`https://localhost:7098/api/User/Edit/${data.id}`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

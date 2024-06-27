@@ -10,6 +10,6 @@ public class CommentModel
     
     public string profileImage { get; set; }
     
-    public DateTime date { get; set; }
+    public string date { get; set; }
     
 }

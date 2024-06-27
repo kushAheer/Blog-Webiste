@@ -12,6 +12,7 @@ using System.Net;
 using Backend.Data.Error;
 using Backend.Data.Services.Cloudinary;
 using Backend.Data.Services.User;
+using Backend.Modals.ViewModals;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 
@@ -150,9 +151,10 @@ namespace BlogWeb.Backend.Controllers
             
 
         }
-        [HttpPatch("{id}")]
-        [Authorize]
-        public async Task<IActionResult> Edit(int id,Users updatedUser)
+        [HttpPatch]
+        
+        
+        public async Task<IActionResult> Edit([FromForm]EditUserModel updatedUser)
         {
             try
             {
@@ -163,7 +165,7 @@ namespace BlogWeb.Backend.Controllers
                 }
                 
 
-                Users user = await _userServices.getUser(id);
+                Users user = await _userServices.getUser(updatedUser.id);
                 if(user == null)
                 {
                     return BadRequest(new Error(202, "User Not Found"));
@@ -190,13 +192,15 @@ namespace BlogWeb.Backend.Controllers
                 user.userName = updatedUser.userName;
                 
                 user.fullName = updatedUser.fullName;
-                user.profileImage = updatedUser.profileImage;
-                // string profileImage = await _cloudinaryServices.addProfilePicture(updatedUser.);
                 
+                string profileImage = await _cloudinaryServices.addProfilePicture(updatedUser.profileImage);
+                user.profileImage = profileImage;
                 user.mobileNumber = updatedUser.mobileNumber;
                 user.modifiedAt = DateTime.Now;
-                user.Email = updatedUser.Email; 
-                
+                user.Email = updatedUser.Email;
+                user.isDeleted = false;
+                string token = _userServices.generateToken(user);
+                user.Token = token;
                 _userServices.updateProfile(user);
                    
                 return Ok(new
@@ -208,6 +212,7 @@ namespace BlogWeb.Backend.Controllers
                     profileImage = user.profileImage,
                     fullName = user.fullName, 
                     mobileNumber = user.mobileNumber,
+                    token = token,
                     
                 });
 

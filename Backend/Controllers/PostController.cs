@@ -142,7 +142,7 @@ namespace Backend.Controllers
                     userName = userData.userName,
                     fullName = userData.fullName,
                     email = userData.Email,
-                    prfileImage = userData.profileImage,
+                    profileImage = userData.profileImage,
                     id = userData.Id
                 }
             });
