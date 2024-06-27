@@ -26,7 +26,7 @@ export async function RegisterAction({request}) {
         password : formData.get('password')
     }; 
     const responseData  = await responseRegister(data)
-
+    console.log(responseData);
     if(responseData.status === 200){
         
         return redirect('/login');
@@ -34,7 +34,7 @@ export async function RegisterAction({request}) {
     else{
         alert("Registration Failed");
 
-        console.log(responseData);
+        
     }   
     return responseData;
 }

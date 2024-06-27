@@ -48,9 +48,9 @@ namespace Backend.Controllers
                 {
                     return BadRequest(new Error(202, "Summary Should Be Greater Than 50 Characters"));
                 }
-                if(postData.Title.Length > 30)
+                if(!(postData.Title.Length < 100))
                 {
-                    return BadRequest(new Error(202, "Title Should Be Less Than 30 Characters"));
+                    return BadRequest(new Error(202, "Title Should Be Less Than 100 Characters"));
                 }
                 if(postData.Category.Length > 20)
                 {

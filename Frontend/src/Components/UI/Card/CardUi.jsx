@@ -23,7 +23,7 @@ function CardUi(props, { cssClass ="cardUi" }) {
                                 <Link to={`/post/${props.id}`} className={`${classes.learnMore}`}>Learn More</Link>
                             </div>
                             <div className='right col-md-6 offset-md-4'>
-                                {like && <Like />}
+                                {/* {like && <Like />} */}
                             </div>
                         </div>
                         

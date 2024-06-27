@@ -9,5 +9,6 @@ public interface ICommentServices
     
     string deleteComment(Comments commentsData);
     
-    Task<List<CommentModel>> getCommentById(int id);
+    Task<Comments> getCommentById(int commentId);
+    Task<List<CommentModel>> getCommentListById(int id);
 }

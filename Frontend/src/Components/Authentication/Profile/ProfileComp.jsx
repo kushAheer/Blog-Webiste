@@ -5,7 +5,7 @@ import { NavLink, useLoaderData } from "react-router-dom";
 function ProfileComp() {
 
     const data = useLoaderData();
-    console.log(data);
+    
     return (
         <React.Fragment>
 
@@ -26,7 +26,7 @@ function ProfileComp() {
                             {data.postData.posts.map((item) => {
                                 return (
                                     <div className="col-md-4" key={item.id}>
-                                        <img className={`${classes.img}`} src={`${item.image}`} />
+                                        <NavLink to={`/post/${item.id}`}><img className={`${classes.img}`} src={`${item.image}`} /></NavLink>
                                     </div>
                                     
                                 )

@@ -53,6 +53,7 @@ function PostByIdComponent(props) {
     const content = data.postData.post.summary;
     
     
+    
     return (
 
         <>
@@ -83,7 +84,9 @@ function PostByIdComponent(props) {
                                 </div>
                                 <ButtonUi type={"submit"} classes={"col-md-2"} onClick = {()=>{setTimeout(()=>{setCommentInput("")},2000)}}>Send</ButtonUi>
                             </Form>
-                            <CommentList />
+                            <CommentList 
+                                
+                             />
                         </div>
                     </div>
                 </div>

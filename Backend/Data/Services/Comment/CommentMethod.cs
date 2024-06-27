@@ -49,7 +49,21 @@ public class CommentMethod : ICommentServices
         return "Error";
     }
 
-    public async Task<List<CommentModel>> getCommentById(int id)
+    public Task<Comments> getCommentById(int id)
+    {
+        try
+        {
+            Comments data = _context.Comments.FirstOrDefault(x=>x.Id == id);
+            return Task.FromResult(data);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    public async Task<List<CommentModel>> getCommentListById(int id)
     {
         try
         {
@@ -62,6 +76,7 @@ public class CommentMethod : ICommentServices
                 var user =  _context.Users.Find(comment.userId);
                 CommentModel commentModel = new CommentModel
                 {
+                    commentId = comment.Id,
                     postId = comment.postId,
                     userName = user.userName,
                     comment = comment.Message,

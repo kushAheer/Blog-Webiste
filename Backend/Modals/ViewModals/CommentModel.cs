@@ -2,6 +2,7 @@ namespace Backend.Modals.ViewModals;
 
 public class CommentModel
 {
+    public int commentId { get; set; }
     public int postId { get; set; }
     
     public string userName { get; set; }

@@ -69,7 +69,7 @@ namespace BlogWeb.Backend.Controllers
                 
                 userVal.Token = token;
 
-                userVal.profileImage = "https://images6.alphacoders.com/125/1258531.jpg";
+                userVal.profileImage = "https://res.cloudinary.com/kushaheer/image/upload/v1719516061/samples/zvwe8kue0a65d85xfs5a.png";
                 
 
                 userVal.fullName = userData.fullName;

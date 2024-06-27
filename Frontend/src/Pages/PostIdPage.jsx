@@ -25,7 +25,7 @@ export async function CommentAction({request , response , params}){
         userId : JSON.parse(localStorage.getItem('user')).id,
         message : formData.get('comment')
     };
-    console.log(data);
+    
     const res = await responseCreateComment(data);
     
 
@@ -43,6 +43,6 @@ export async function postIdLoader({params}){
     if(data === null ){
         return <NotFoundComp    />
     }
-    console.log(commentList.data);
+    
     return {postData : data ,isLiked , commentData : commentList.data};
 }

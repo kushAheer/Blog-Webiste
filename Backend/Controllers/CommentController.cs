@@ -69,7 +69,7 @@ public class CommentController : Controller
                 return BadRequest(new Error(202, "All Fields Are Required "));
             }
 
-            List<CommentModel> comments = await _commentServices.getCommentById(postId);
+            List<CommentModel> comments = await _commentServices.getCommentListById(postId);
             
             return Ok(new
             {
@@ -85,7 +85,8 @@ public class CommentController : Controller
         }
     }
     [HttpDelete]
-    public IActionResult Delete(Comments commentsData)
+    [Authorize]
+    public async Task<IActionResult> Delete(int commentId)
     {
         try
         {
@@ -93,7 +94,10 @@ public class CommentController : Controller
             {
                 return BadRequest(new Error(202, "All Fields Are Required "));
             }
-
+            
+            Comments commentsData = await _commentServices.getCommentById(commentId);
+            
+            
             string status = _commentServices.deleteComment(commentsData);
             if (status == "Error")
             {
@@ -112,4 +116,6 @@ public class CommentController : Controller
             throw;
         }
     }
+    
+    
 }
