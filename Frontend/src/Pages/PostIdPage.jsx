@@ -1,4 +1,5 @@
 
+import { redirect } from "react-router-dom";
 import NotFoundComp from "../Components/Error/NotFoundComp";
 import PostByIdComponent from "../Components/Post/GET/PostByIdComponent";
 import { getPostById, postLiked , commentData } from "../Services/GetApi";
@@ -33,6 +34,11 @@ export async function CommentAction({request , response , params}){
 }
 
 export async function postIdLoader({params}){
+
+    if(localStorage.getItem('user') === null){
+        return redirect('/login');
+    }
+
     const data = await getPostById(params.id);
     const userId = JSON.parse(localStorage.getItem('user')).id;
     const commentList = await commentData(data.post.id);

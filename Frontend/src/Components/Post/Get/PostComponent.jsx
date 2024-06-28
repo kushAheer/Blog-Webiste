@@ -1,7 +1,11 @@
 import { useLoaderData } from "react-router-dom";
 import CardUi from "../../UI/Card/CardUi";
+import { redirect } from "react-router-dom";
+
 function PostComponent() {
     const data  = useLoaderData();
+    
+    
     console.log(data)
     return (
         <>

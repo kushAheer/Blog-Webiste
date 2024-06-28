@@ -10,7 +10,7 @@ function NavBarComponent({isToken}) {
 
     
     const [token, setToken] = useState();
-    const [user , setProfileImage] = useState("");
+    const [user , setProfileImage] = useState();
     const logOut = ()=>{
         setToken(null);
         setProfileImage('');
@@ -27,7 +27,7 @@ function NavBarComponent({isToken}) {
             setToken(isToken);
             
         }
-    },[isToken]);
+    },[isToken , user]);
 
     return (
         <>

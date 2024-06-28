@@ -1,11 +1,14 @@
 import classes from './CreatePostComp.module.css'
 import { Editor } from "@tinymce/tinymce-react";
 import { useState } from 'react';
+import { useNavigation } from 'react-router-dom';
 function CreatePostComp({ onSubmit }) {
 
     const [value, setValue] = useState('');
     const [text , setText] = useState('');
-
+    const navigation  = useNavigation();
+    const isSubmiting = navigation.state === "submitting";
+    
 
     const submitHandler = (e) => {
 
@@ -66,8 +69,9 @@ function CreatePostComp({ onSubmit }) {
                         <label>Image</label>
                         <input type="file" className="form-control" placeholder="Cover Image" name="image" />
                     </div>
-                    <div className="col-md-12 pt-5">
-                        <button type="submit" className={`${classes.button} w-100`}>Create Post</button>
+                    <div className="col-md-12 pt-5 pb-5">
+                        
+                        <button type='submit'  disabled={isSubmiting} className={`${classes.button} cursor-pointer text-center  text-lg px-4 rounded-5 mt-4 text-white w-100`}>{isSubmiting ? "Submiting":"Create"}</button>
                     </div>
                 </form>
             </div>

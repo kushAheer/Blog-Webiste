@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 import classes from './CardUi.module.css';
 import Like from '../Like/Like';
 import { useEffect, useState } from 'react';

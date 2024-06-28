@@ -153,7 +153,7 @@ namespace BlogWeb.Backend.Controllers
         }
         [HttpPatch]
         
-        
+        [Authorize]
         public async Task<IActionResult> Edit([FromForm]EditUserModel updatedUser)
         {
             try

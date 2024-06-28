@@ -4,12 +4,13 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { responseEditUserDetails } from '../../../Services/PostApi';
 function EditProfileComp() {
-
+    
     const navigate = useNavigate();
+    const isSubmiting = navigate.state === "submitting";
     const data = JSON.parse(localStorage.getItem('user'));
     const [fullName, setFullName] = useState(data.fullName);
 
-    const [userName, setUserName] = useState(data.user);
+    const [userName, setUserName] = useState(data.userName);
     const [email, setEmail] = useState(data.email);
     const [mobileNumber, setMobileNumber] = useState(data.mobileNumber);
 
@@ -39,13 +40,14 @@ function EditProfileComp() {
             method: 'PATCH',
             headers: {
                 'Accept': 'application/json',
-                // 'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
                 'contentType': 'multipart/form-data'
             },
             body: formData
         }).then(response => response.json());
         if (responseData.status === 200) {
-            localStorage.setItem('user', JSON.stringify(responseData.data));
+            localStorage.removeItem('user');
+            localStorage.setItem('user', JSON.stringify(responseData));
             localStorage.setItem('token', responseData.token);
             navigate('/');
         }
@@ -88,7 +90,7 @@ function EditProfileComp() {
                         </div>
                         <div className='row'>
                             <div className='col-md-12 pt-3'>
-                                <button type='submit' className={`${classes.button}   cursor-pointer text-center  text-lg px-4 rounded-5 mt-4 text-white w-100`}>Update Information</button>
+                            <button type='submit'  disabled={isSubmiting} className={`${classes.button} cursor-pointer text-center  text-lg px-4 rounded-5 mt-4 text-white w-100`}>{isSubmiting ? "Submiting":"Update"}</button>
                             </div>
                         </div>
                     </form>

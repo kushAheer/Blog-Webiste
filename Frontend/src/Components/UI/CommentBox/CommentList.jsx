@@ -1,13 +1,14 @@
 import './CommentList.css';
 import { Link, useLoaderData } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 function CommentList() {
     const data = useLoaderData().commentData;
     const [comments, setComments] = useState(data);
-    
+    useEffect(() => {
+        setComments(data);
+    },[data]);
     console.log(data);
     const deleteHandler = async (commentId) => {
-        
         
         const response = await fetch(`https://localhost:7098/api/Comment/Delete?commentId=${commentId}`, {
             method: 'DELETE',
@@ -46,7 +47,6 @@ function CommentList() {
 
                     </div>
                 ))}
-
             </div>
         </React.Fragment>
     )
