@@ -5,15 +5,15 @@ import { responseCreatePost } from "../Services/PostApi";
 
 function CreatePostPage(props){
     
-    const token = localStorage.getItem("token");
     const navigate = useNavigate();
+    // const token = localStorage.getItem("token");
     
-    useEffect(()=>{
-        console.log("UseEffect");
-        if(token === null ){
-            navigate('/login');
-        }
-    },[token])
+    // useEffect(()=>{
+    //     console.log("UseEffect");
+    //     if(token === null ){
+    //         navigate('/login');
+    //     }
+    // },[token])
 
     const Submit =async (data) =>{
         

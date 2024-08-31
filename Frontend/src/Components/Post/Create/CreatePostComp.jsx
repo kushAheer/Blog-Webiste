@@ -1,6 +1,6 @@
 import classes from './CreatePostComp.module.css'
 import { Editor } from "@tinymce/tinymce-react";
-import { useState } from 'react';
+import { lazy, useState } from 'react';
 import { useNavigation } from 'react-router-dom';
 function CreatePostComp({ onSubmit }) {
 
@@ -8,6 +8,7 @@ function CreatePostComp({ onSubmit }) {
     const [text , setText] = useState('');
     const navigation  = useNavigation();
     const isSubmiting = navigation.state === "submitting";
+    
     
 
     const submitHandler = (e) => {
@@ -23,6 +24,7 @@ function CreatePostComp({ onSubmit }) {
             userId: JSON.parse(localStorage.getItem('user')).id,
             text:text
         }
+
         
 
         
@@ -39,11 +41,12 @@ function CreatePostComp({ onSubmit }) {
 
                     <div className="col-md-12 pt-3">
                         <label>Ttile</label>
-                        <input type="text" className={`form-control ${classes.inputItem}`} placeholder="Enter Title" name="title" />
+                        <input type="text" required className={`form-control ${classes.inputItem}`} placeholder="Enter Title" name="title" />
                     </div>
                     <div className="col-md-12 pt-3">
                         <label className='pb-3'>Description</label>
                         <Editor
+                        required
                         apiKey='c8hc1azkkivzoswbcmbs8hx1dtwkfxlfbi2lj98n10hn2dex'
                             value={value}
                             
@@ -67,7 +70,7 @@ function CreatePostComp({ onSubmit }) {
                     </div>
                     <div className="col-md-12 pt-3">
                         <label>Image</label>
-                        <input type="file" className="form-control" placeholder="Cover Image" name="image" />
+                        <input type="file" className="form-control" required placeholder="Cover Image" name="image" />
                     </div>
                     <div className="col-md-12 pt-5 pb-5">
                         

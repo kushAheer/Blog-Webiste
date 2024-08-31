@@ -4,14 +4,12 @@ import { useDispatch } from "react-redux";
 import { userSlice } from "../Services/Data/Slices/UserSlice";
 
 function Layout() {
-    const token = useRouteLoaderData('layout');
+    
     
     return(
         <div>
             <div>
-                <NavBarComponent
-                    isToken={token}
-                />
+                <NavBarComponent/>
             </div>
             <Outlet/>
         </div>

@@ -1,14 +1,9 @@
 import { Link, redirect } from 'react-router-dom';
 import classes from './CardUi.module.css';
-import Like from '../Like/Like';
-import { useEffect, useState } from 'react';
+
+
 function CardUi(props, { cssClass ="cardUi" }) {
-    const [like, setLike] = useState(false);
-    useEffect(() => {
-        if (localStorage.getItem('token')) {
-            setLike(true);
-        }
-    }, [like]);
+    
     
     return (
         <>

@@ -1,18 +1,21 @@
 
+import { lazy, Suspense } from "react";
 import HeroBanner from "../Components/Home/HeroBanner";
 
-import PostComponent from "../Components/Post/GET/PostComponent.jsx";
+// import PostComponent from "../Components/Post/GET/PostComponent.jsx";
 
 import {getPost} from "../Services/GetApi";
 
 function HomePage() {
     
-    
+    const LazyLoading = lazy(()=>import('../Components/Post/GET/PostComponent.jsx'));
     
     return (
         <div>
             <HeroBanner/>
-            <PostComponent  />
+            <Suspense fallback={<div>Loading...</div>}>
+                <LazyLoading />
+            </Suspense>
         </div>
     )
 }

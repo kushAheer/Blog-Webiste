@@ -1,5 +1,6 @@
 import {
   createBrowserRouter,
+  Navigate,
   RouterProvider,
 } from "react-router-dom";
 import './App.css'
@@ -11,13 +12,17 @@ import { tokenLoader } from "./utils/auth";
 import CreatePostPage from "./Pages/CreatePostPage";
 import { LoginAction } from "./Pages/LoginPage";
 import ProfilePage, { ProfileLoader } from "./Pages/ProfilePage";
-
+import { useSelector } from "react-redux";
 import NotFoundComp from "./Components/Error/NotFoundComp";
 import PostIdPage, { CommentAction, postIdLoader } from "./Pages/PostIdPage";
 import EditPage, { EditAction, EditLoader } from "./Pages/EditPage";
+import { useNavigate } from "react-router-dom";
 
 function App() {
 
+  
+
+  const auth = useSelector(state => state.users.user);
   
   const router = createBrowserRouter([
     {
@@ -30,12 +35,13 @@ function App() {
       {index : true, element: <HomePage/>, loader : PostLoader},
       {path : "/register", element: <RegisterPage/>, action : RegisterAction},
       {path : "/login", element: <LoginPage/> , action : LoginAction},
-      {path : '/edit/:id', element : <EditPage/>,loader : EditLoader , action : EditAction},
-      {path : '/profile',element:<ProfilePage/>,loader : ProfileLoader},
+      {path : '/edit/:id', element : auth ?  <EditPage/> : <Navigate to={'/login'}/>,loader : EditLoader , action : EditAction},
+      {path : '/profile',element:  auth ?  <ProfilePage/>: <Navigate to={'/login'}/>,loader : ProfileLoader},
       {path : "/post", 
+  
       children : [
-        {path: "add", element: <CreatePostPage/>,},
-        {path: ":id", element: <PostIdPage/> , action : CommentAction ,loader : postIdLoader ,}
+        {path: "add", element: auth ?  <CreatePostPage/> : <Navigate to={'/login'}/>,},
+        {path: ":id", element: auth ?  <PostIdPage/> : <Navigate to={'/login'}/> , action : CommentAction ,loader : postIdLoader ,}
      ]}
     ]},
     {path : "*", element : <NotFoundComp/>},

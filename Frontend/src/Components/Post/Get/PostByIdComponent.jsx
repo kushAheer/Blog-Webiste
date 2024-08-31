@@ -4,6 +4,7 @@ import Like from "../../UI/Like/Like";
 import { useRef, useState } from "react";
 import CommentList from "../../UI/CommentBox/CommentList";
 import ButtonUi from "../../UI/Button/Button";
+import { useSelector } from "react-redux";
 
 function PostByIdComponent(props) {
 
@@ -13,7 +14,7 @@ function PostByIdComponent(props) {
     const [totalLike, setTotalLike] = useState(data.postData.post.totalLikes);
 
 
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = useSelector(state => state.users.user);
 
     const increaseLike = async () => {
         console.log("increase like")

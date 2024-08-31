@@ -1,13 +1,15 @@
 import './CommentList.css';
 import { Link, useLoaderData } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 function CommentList() {
     const data = useLoaderData().commentData;
     const [comments, setComments] = useState(data);
+    
     useEffect(() => {
         setComments(data);
     },[data]);
-    console.log(data);
+    
     const deleteHandler = async (commentId) => {
         
         const response = await fetch(`https://localhost:7098/api/Comment/Delete?commentId=${commentId}`, {
@@ -28,7 +30,7 @@ function CommentList() {
             setComments(updatedComments);
         }
     }
-    const user = JSON.parse(localStorage.getItem('user')).user;
+    const user = useSelector(state => state.users.user);
     return (
         <React.Fragment>
             

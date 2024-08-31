@@ -3,16 +3,22 @@ import { Form, NavLink } from 'react-router-dom'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { responseEditUserDetails } from '../../../Services/PostApi';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setUser, userSlice } from '../../../Services/Data/Slices/UserSlice';
 function EditProfileComp() {
     
     const navigate = useNavigate();
     const isSubmiting = navigate.state === "submitting";
-    const data = JSON.parse(localStorage.getItem('user'));
+    // const data = JSON.parse(localStorage.getItem('user'));
+    const data = useSelector(state => state.users.user);
     const [fullName, setFullName] = useState(data.fullName);
 
     const [userName, setUserName] = useState(data.userName);
     const [email, setEmail] = useState(data.email);
     const [mobileNumber, setMobileNumber] = useState(data.mobileNumber);
+
+    const dispatch = useDispatch();
 
     const submitHandler = async (e) => {
         console.log("SUBMIT")
@@ -46,9 +52,10 @@ function EditProfileComp() {
             body: formData
         }).then(response => response.json());
         if (responseData.status === 200) {
-            localStorage.removeItem('user');
-            localStorage.setItem('user', JSON.stringify(responseData));
-            localStorage.setItem('token', responseData.token);
+
+            dispatch(setUser(responseData));
+            
+
             navigate('/');
         }
 
@@ -81,7 +88,7 @@ function EditProfileComp() {
                             <input type='number' className={`${classes.inputItem} form-control`} name='mobileNumber' required placeholder='Mobile Number' value={mobileNumber} onChange={(e) => setMobileNumber(e.target.value)} />
                         </div>
                         <div className='col-md-12'>
-                            <label className={`form-label ${classes.itemLablel}`}>Full Name</label>
+                            <label className={`form-label ${classes.itemLablel}`}>Profile Image</label>
                             <input type='file' className={`${classes.inputItem} form-control`} required name='profileImage' />
                         </div>
 
