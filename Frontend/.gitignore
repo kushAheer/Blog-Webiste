@@ -1,11 +1,6 @@
 #tinymce
-/postinstall.cjs
-/public/tinymce/
-README.md
-.eslintrc.cjs
-vite.config.js
-postcss.config.js
-tailwind.config.js
+
+
 package-lock.json
 # Logs
 logs
