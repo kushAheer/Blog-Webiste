@@ -3,7 +3,8 @@ Backend/obj
 Backend/appsettings.json
 Backend/Assets
 Backend/Assets/Images
-
+wwwroot
+Migrations
 # Created by https://www.toptal.com/developers/gitignore/api/node,aspnetcore,react
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,aspnetcore,react
 
