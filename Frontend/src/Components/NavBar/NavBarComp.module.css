@@ -1,0 +1,44 @@
+.itemsContainer{
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+.item{
+    text-decoration: none;
+}
+
+.logIn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button{
+    margin: auto;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 15px;
+}
+
+.container{
+    border-bottom: 1px solid gray;
+    
+}
+.cont{
+    width: 20%;
+    justify-content: space-evenly;
+}
+
+.signUp{
+    text-decoration: none;
+    color: #9900ff;
+}
+.login{
+    text-decoration: none;
+    color: #9900ff;   
+}
+.signUp::after{
+    color: aqua;
+}

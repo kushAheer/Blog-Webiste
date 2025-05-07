@@ -1,0 +1,48 @@
+
+
+
+.centerAlign{
+    max-width: 100px;
+    margin: auto;
+
+}
+
+.itemAlign{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.itemLablel{
+    
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: medium;
+}
+
+.button{
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 15px;
+    background-color: darkturquoise;
+    box-shadow: 1px 17px 13px 1px rgba(0,0,0,.1);
+    background-color: #8C52FF;
+    border: solid 2px #8C52FF;
+    font-size: 18px;
+}
+
+.inputItem{
+    font-size: xx-large;
+}
+.adjustWidth{
+    /* width: 40%; */
+    padding-left: 5%;
+    padding-right: 10%;
+    
+}
+
+.textColor{
+    color: #8C52FF;
+}
+.fontsize{
+    
+    font-size: xxx-large;
+}

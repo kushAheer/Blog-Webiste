@@ -1,0 +1,23 @@
+.learnMore{
+    text-decoration: none;
+    color: blueviolet;
+}
+
+.cardUi{
+    width: 100%;
+    
+}
+
+.latestPost{
+    width: 50%;
+    height: 30%;
+    
+} 
+.summary {
+    
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+    
+} 
